@@ -1,0 +1,8190 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hant">
+
+<head>
+
+  <base target="_top">
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="
+      width=device-width,
+      initial-scale=1.0,
+      maximum-scale=1.0,
+      viewport-fit=cover
+    "
+  >
+
+  <title>校園生活50問</title>
+
+
+<style>
+
+/* ============================================================
+   基本
+============================================================ */
+
+:root {
+
+  --app-height: 100dvh;
+
+  --safe-top:
+    env(safe-area-inset-top, 0px);
+
+  --safe-right:
+    env(safe-area-inset-right, 0px);
+
+  --safe-bottom:
+    env(safe-area-inset-bottom, 0px);
+
+  --safe-left:
+    env(safe-area-inset-left, 0px);
+
+  --gap:
+    clamp(
+      4px,
+      .55vw,
+      8px
+    );
+
+}
+
+
+* {
+
+  box-sizing:
+    border-box;
+
+}
+
+
+html,
+body {
+
+  margin:
+    0;
+
+  padding:
+    0;
+
+  width:
+    100%;
+
+  height:
+    100%;
+
+  overflow:
+    hidden;
+
+}
+
+
+body {
+
+  font-family:
+    "Noto Sans TC",
+    "Microsoft JhengHei",
+    Arial,
+    sans-serif;
+
+  background:
+    #eef3f8;
+
+  color:
+    #263238;
+
+  height:
+    var(--app-height);
+
+}
+
+
+/* ============================================================
+   主畫面
+============================================================ */
+
+.app {
+
+  width:
+    100%;
+
+  height:
+    var(--app-height);
+
+  display:
+    grid;
+
+  grid-template-rows:
+    auto
+    minmax(0, 1fr);
+
+  gap:
+    5px;
+
+  padding:
+
+    max(
+      5px,
+      var(--safe-top)
+    )
+
+    max(
+      7px,
+      var(--safe-right)
+    )
+
+    max(
+      5px,
+      var(--safe-bottom)
+    )
+
+    max(
+      7px,
+      var(--safe-left)
+    );
+
+  overflow:
+    hidden;
+
+}
+
+
+/* ============================================================
+   極簡功能列
+============================================================ */
+
+.topbar {
+
+  min-height:
+    38px;
+
+  background:
+    white;
+
+  border-radius:
+    11px;
+
+  padding:
+    4px
+    7px;
+
+  box-shadow:
+    0 2px 6px
+    rgba(0,0,0,.08);
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    space-between;
+
+  gap:
+    8px;
+
+  overflow:
+    hidden;
+
+}
+
+
+.top-left {
+
+  min-width:
+    0;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    clamp(
+      5px,
+      1.1vw,
+      14px
+    );
+
+  white-space:
+    nowrap;
+
+}
+
+
+.class-badge {
+
+  max-width:
+    180px;
+
+  overflow:
+    hidden;
+
+  text-overflow:
+    ellipsis;
+
+  background:
+    #e3f2fd;
+
+  color:
+    #1565c0;
+
+  border-radius:
+    8px;
+
+  padding:
+    5px
+    8px;
+
+  font-size:
+    clamp(
+      10px,
+      1.2vw,
+      14px
+    );
+
+  font-weight:
+    900;
+
+}
+
+
+.mini-stat {
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    2px;
+
+  color:
+    #607d8b;
+
+  font-size:
+    clamp(
+      9px,
+      1.05vw,
+      13px
+    );
+
+}
+
+
+.mini-stat strong {
+
+  color:
+    #263238;
+
+  font-size:
+    clamp(
+      13px,
+      1.5vw,
+      19px
+    );
+
+}
+
+
+.mini-stat.correct strong {
+
+  color:
+    #2e7d32;
+
+}
+
+
+.mini-stat.wrong strong {
+
+  color:
+    #c62828;
+
+}
+
+
+/* ============================================================
+   同步狀態
+============================================================ */
+
+.sync-status {
+
+  flex:
+    0
+    0
+    auto;
+
+  border-radius:
+    20px;
+
+  padding:
+    4px
+    8px;
+
+  font-size:
+    clamp(
+      9px,
+      1vw,
+      12px
+    );
+
+  font-weight:
+    800;
+
+}
+
+
+.sync-status.synced {
+
+  background:
+    #e8f5e9;
+
+  color:
+    #2e7d32;
+
+}
+
+
+.sync-status.syncing {
+
+  background:
+    #fff8e1;
+
+  color:
+    #ef6c00;
+
+}
+
+
+.sync-status.pending {
+
+  background:
+    #ffebee;
+
+  color:
+    #c62828;
+
+}
+
+
+.sync-status.local {
+
+  background:
+    #eceff1;
+
+  color:
+    #546e7a;
+
+}
+
+
+/* ============================================================
+   功能按鈕
+============================================================ */
+
+.top-actions {
+
+  flex:
+    0
+    0
+    auto;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    5px;
+
+}
+
+
+.small-btn {
+
+  border:
+    none;
+
+  border-radius:
+    8px;
+
+  min-height:
+    30px;
+
+  padding:
+    5px
+    9px;
+
+  font-family:
+    inherit;
+
+  font-size:
+    clamp(
+      10px,
+      1.05vw,
+      13px
+    );
+
+  font-weight:
+    800;
+
+  cursor:
+    pointer;
+
+  touch-action:
+    manipulation;
+
+}
+
+
+.random-btn {
+
+  background:
+    #ff9800;
+
+  color:
+    white;
+
+}
+
+
+.fullscreen-btn {
+
+  background:
+    #1976d2;
+
+  color:
+    white;
+
+}
+
+
+.menu-btn {
+
+  background:
+    #607d8b;
+
+  color:
+    white;
+
+}
+
+
+/* ============================================================
+   卡牌區
+============================================================ */
+
+.board {
+
+  width:
+    100%;
+
+  min-width:
+    0;
+
+  min-height:
+    0;
+
+  background:
+    white;
+
+  border-radius:
+    12px;
+
+  padding:
+    clamp(
+      5px,
+      .55vw,
+      9px
+    );
+
+  box-shadow:
+    0 2px 7px
+    rgba(0,0,0,.08);
+
+  overflow:
+    hidden;
+
+}
+
+
+.cards {
+
+  width:
+    100%;
+
+  height:
+    100%;
+
+  min-width:
+    0;
+
+  min-height:
+    0;
+
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(
+      10,
+      minmax(0, 1fr)
+    );
+
+  grid-template-rows:
+    repeat(
+      5,
+      minmax(0, 1fr)
+    );
+
+  gap:
+    var(--gap);
+
+  overflow:
+    hidden;
+
+}
+
+
+/* ============================================================
+   卡牌
+============================================================ */
+
+.card {
+
+  width:
+    100%;
+
+  height:
+    100%;
+
+  min-width:
+    0;
+
+  min-height:
+    0;
+
+  padding:
+    2px;
+
+  border:
+
+    clamp(
+      2px,
+      .2vw,
+      4px
+    )
+
+    solid
+
+    rgba(
+      255,
+      255,
+      255,
+      .75
+    );
+
+  border-radius:
+    clamp(
+      6px,
+      .7vw,
+      13px
+    );
+
+  background:
+    linear-gradient(
+      145deg,
+      #42a5f5,
+      #1565c0
+    );
+
+  color:
+    white;
+
+  position:
+    relative;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  overflow:
+    hidden;
+
+  cursor:
+    pointer;
+
+  box-shadow:
+    0 2px 6px
+    rgba(0,0,0,.18);
+
+  transition:
+    transform .15s,
+    box-shadow .15s,
+    background .2s;
+
+  touch-action:
+    manipulation;
+
+}
+
+
+.card::before {
+
+  content:
+    "";
+
+  position:
+    absolute;
+
+  inset:
+    clamp(
+      3px,
+      .4vw,
+      7px
+    );
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      .4
+    );
+
+  border-radius:
+    clamp(
+      4px,
+      .55vw,
+      9px
+    );
+
+  pointer-events:
+    none;
+
+}
+
+
+.card-number {
+
+  position:
+    relative;
+
+  z-index:
+    2;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  width:
+    clamp(
+      27px,
+      min(4.2vw, 7vh),
+      58px
+    );
+
+  height:
+    clamp(
+      27px,
+      min(4.2vw, 7vh),
+      58px
+    );
+
+  border-radius:
+    50%;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      .18
+    );
+
+  border:
+    2px solid
+    rgba(
+      255,
+      255,
+      255,
+      .7
+    );
+
+  color:
+    white;
+
+  font-size:
+    clamp(
+      13px,
+      min(1.9vw, 3.5vh),
+      28px
+    );
+
+  font-weight:
+    900;
+
+  text-shadow:
+    0 2px 3px
+    rgba(0,0,0,.25);
+
+}
+
+
+.card.correct {
+
+  background:
+    linear-gradient(
+      145deg,
+      #66bb6a,
+      #2e7d32
+    );
+
+}
+
+
+.card.wrong {
+
+  background:
+    linear-gradient(
+      145deg,
+      #ef5350,
+      #b71c1c
+    );
+
+}
+
+
+.card.used {
+
+  cursor:
+    default;
+
+}
+
+
+@media
+(hover: hover)
+and
+(pointer: fine) {
+
+  .card:not(.used):hover {
+
+    transform:
+      translateY(-3px)
+      scale(1.02);
+
+    box-shadow:
+      0 5px 11px
+      rgba(0,0,0,.23);
+
+  }
+
+}
+
+
+/* ============================================================
+   Loading
+============================================================ */
+
+.loading {
+
+  grid-column:
+    1 / -1;
+
+  grid-row:
+    1 / -1;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  text-align:
+    center;
+
+  font-size:
+    clamp(
+      15px,
+      2vw,
+      22px
+    );
+
+  color:
+    #607d8b;
+
+}
+
+
+/* ============================================================
+   Overlay
+============================================================ */
+
+.overlay {
+
+  display:
+    none;
+
+  position:
+    fixed;
+
+  z-index:
+    1000;
+
+  inset:
+    0;
+
+  width:
+    100%;
+
+  height:
+    var(--app-height);
+
+  background:
+    rgba(
+      0,
+      0,
+      0,
+      .72
+    );
+
+  padding:
+
+    max(
+      8px,
+      var(--safe-top)
+    )
+
+    max(
+      8px,
+      var(--safe-right)
+    )
+
+    max(
+      8px,
+      var(--safe-bottom)
+    )
+
+    max(
+      8px,
+      var(--safe-left)
+    );
+
+  overflow:
+    hidden;
+
+}
+
+
+.overlay.show {
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+}
+
+
+/* ============================================================
+   Modal
+============================================================ */
+
+.modal {
+
+  width:
+    min(
+      820px,
+      100%
+    );
+
+  max-height:
+    calc(
+      var(--app-height)
+      -
+      var(--safe-top)
+      -
+      var(--safe-bottom)
+      -
+      16px
+    );
+
+  background:
+    white;
+
+  border-radius:
+    clamp(
+      13px,
+      1.5vw,
+      21px
+    );
+
+  padding:
+    clamp(
+      15px,
+      2vw,
+      28px
+    );
+
+  box-shadow:
+    0 15px 50px
+    rgba(0,0,0,.35);
+
+  overflow-y:
+    auto;
+
+  overscroll-behavior:
+    contain;
+
+  -webkit-overflow-scrolling:
+    touch;
+
+}
+
+
+/* ============================================================
+   開場 / 選班
+============================================================ */
+
+.start-modal {
+
+  width:
+    min(
+      520px,
+      94vw
+    );
+
+  text-align:
+    center;
+
+}
+
+
+.start-icon {
+
+  font-size:
+    clamp(
+      38px,
+      6vw,
+      64px
+    );
+
+}
+
+
+.start-title {
+
+  margin:
+    7px 0 5px;
+
+  color:
+    #1976d2;
+
+  font-size:
+    clamp(
+      27px,
+      4vw,
+      40px
+    );
+
+  font-weight:
+    900;
+
+}
+
+
+.start-text {
+
+  margin:
+    0 0 20px;
+
+  color:
+    #607d8b;
+
+}
+
+
+.class-select {
+
+  width:
+    100%;
+
+  border:
+    2px solid
+    #cfd8dc;
+
+  border-radius:
+    10px;
+
+  background:
+    white;
+
+  padding:
+    12px;
+
+  font-family:
+    inherit;
+
+  font-size:
+    17px;
+
+  margin-bottom:
+    13px;
+
+}
+
+
+.start-btn {
+
+  width:
+    100%;
+
+  border:
+    none;
+
+  border-radius:
+    10px;
+
+  background:
+    #1976d2;
+
+  color:
+    white;
+
+  padding:
+    12px;
+
+  font-family:
+    inherit;
+
+  font-size:
+    17px;
+
+  font-weight:
+    900;
+
+  cursor:
+    pointer;
+
+}
+
+
+.start-btn:disabled {
+
+  background:
+    #b0bec5;
+
+  cursor:
+    not-allowed;
+
+}
+
+
+/* ============================================================
+   題目
+============================================================ */
+
+.question-header {
+
+  display:
+    flex;
+
+  justify-content:
+    space-between;
+
+  align-items:
+    center;
+
+  gap:
+    10px;
+
+  padding-bottom:
+    12px;
+
+  margin-bottom:
+    16px;
+
+  border-bottom:
+    1px solid #eeeeee;
+
+}
+
+
+.question-number {
+
+  color:
+    #1976d2;
+
+  font-size:
+    clamp(
+      20px,
+      2.4vw,
+      29px
+    );
+
+  font-weight:
+    900;
+
+}
+
+
+.category {
+
+  background:
+    #e3f2fd;
+
+  color:
+    #1565c0;
+
+  border-radius:
+    20px;
+
+  padding:
+    5px 12px;
+
+  font-size:
+    clamp(
+      11px,
+      1.3vw,
+      15px
+    );
+
+  font-weight:
+    800;
+
+}
+
+
+.image-action {
+
+  display:
+    none;
+
+  margin:
+    -3px 0 13px;
+
+}
+
+
+.image-action.show {
+
+  display:
+    block;
+
+}
+
+
+.view-image-btn {
+
+  border:
+    1px solid #90caf9;
+
+  background:
+    #e3f2fd;
+
+  color:
+    #1565c0;
+
+  border-radius:
+    9px;
+
+  padding:
+    7px 13px;
+
+  font-family:
+    inherit;
+
+  font-size:
+    14px;
+
+  font-weight:
+    800;
+
+  cursor:
+    pointer;
+
+}
+
+
+.question-text {
+
+  margin-bottom:
+    17px;
+
+  color:
+    #263238;
+
+  font-size:
+    clamp(
+      18px,
+      2.3vw,
+      27px
+    );
+
+  line-height:
+    1.5;
+
+  font-weight:
+    900;
+
+}
+
+
+/* ============================================================
+   V1.2 題目圖片（L欄）
+============================================================ */
+
+.question-image-block {
+  display: none;
+  margin: 0 0 14px;
+  text-align: center;
+}
+
+.question-image-block.show {
+  display: block;
+}
+
+.question-image-frame {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  max-height: min(40vh, 360px);
+  overflow: hidden;
+  border: 1px solid #dfe6ec;
+  border-radius: 12px;
+  background: #f7f9fb;
+  cursor: zoom-in;
+}
+
+.question-image-frame img {
+  display: block;
+  max-width: 100%;
+  max-height: min(40vh, 360px);
+  object-fit: contain;
+}
+
+.question-image-error {
+  display: none;
+  padding: 13px 15px;
+  border-radius: 10px;
+  background: #fff3e0;
+  color: #e65100;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+.question-image-error.show {
+  display: block;
+}
+
+
+/* ============================================================
+   選項
+============================================================ */
+
+.choices {
+
+  display:
+    grid;
+
+  gap:
+    clamp(
+      7px,
+      1vh,
+      11px
+    );
+
+}
+
+
+.choice {
+
+  width:
+    100%;
+
+  border:
+    2px solid
+    #e0e0e0;
+
+  background:
+    white;
+
+  border-radius:
+    11px;
+
+  padding:
+    clamp(
+      9px,
+      1.2vh,
+      14px
+    )
+    14px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    11px;
+
+  text-align:
+    left;
+
+  font-family:
+    inherit;
+
+  font-size:
+    clamp(
+      15px,
+      1.7vw,
+      20px
+    );
+
+  line-height:
+    1.4;
+
+  cursor:
+    pointer;
+
+}
+
+
+.choice.selected {
+
+  border-color:
+    #1976d2;
+
+  background:
+    #e3f2fd;
+
+}
+
+
+.choice-letter {
+
+  flex:
+    0 0 auto;
+
+  width:
+    clamp(
+      31px,
+      3.4vw,
+      40px
+    );
+
+  height:
+    clamp(
+      31px,
+      3.4vw,
+      40px
+    );
+
+  border-radius:
+    50%;
+
+  background:
+    #eceff1;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  font-weight:
+    900;
+
+}
+
+
+.choice.selected
+.choice-letter {
+
+  background:
+    #1976d2;
+
+  color:
+    white;
+
+}
+
+
+/* ============================================================
+   一般按鈕
+============================================================ */
+
+.answer-actions {
+
+  margin-top:
+    17px;
+
+  display:
+    flex;
+
+  justify-content:
+    center;
+
+  gap:
+    9px;
+
+}
+
+
+.primary-btn,
+.secondary-btn {
+
+  border:
+    none;
+
+  border-radius:
+    9px;
+
+  padding:
+    10px 24px;
+
+  font-family:
+    inherit;
+
+  font-size:
+    16px;
+
+  font-weight:
+    800;
+
+  cursor:
+    pointer;
+
+}
+
+
+.primary-btn {
+
+  background:
+    #1976d2;
+
+  color:
+    white;
+
+}
+
+
+.primary-btn:disabled {
+
+  background:
+    #b0bec5;
+
+  cursor:
+    not-allowed;
+
+}
+
+
+.secondary-btn {
+
+  background:
+    #eceff1;
+
+  color:
+    #455a64;
+
+}
+
+
+/* ============================================================
+   結果
+============================================================ */
+
+.result {
+
+  display:
+    none;
+
+}
+
+
+.result.show {
+
+  display:
+    block;
+
+}
+
+
+.result-banner {
+
+  border-radius:
+    13px;
+
+  padding:
+    14px;
+
+  margin-bottom:
+    14px;
+
+  text-align:
+    center;
+
+  font-size:
+    clamp(
+      20px,
+      2.5vw,
+      28px
+    );
+
+  font-weight:
+    900;
+
+}
+
+
+.result-banner.correct {
+
+  background:
+    #e8f5e9;
+
+  color:
+    #2e7d32;
+
+}
+
+
+.result-banner.wrong {
+
+  background:
+    #ffebee;
+
+  color:
+    #c62828;
+
+}
+
+
+.answer-box {
+
+  background:
+    #f5f7fa;
+
+  border-radius:
+    11px;
+
+  padding:
+    15px;
+
+  font-size:
+    clamp(
+      14px,
+      1.4vw,
+      17px
+    );
+
+  line-height:
+    1.65;
+
+}
+
+
+.explanation {
+
+  margin-top:
+    10px;
+
+  padding-top:
+    10px;
+
+  border-top:
+    1px solid #dddddd;
+
+}
+
+
+.source {
+
+  margin-top:
+    9px;
+
+  color:
+    #78909c;
+
+  font-size:
+    12px;
+
+}
+
+
+.return-btn {
+
+  width:
+    100%;
+
+  margin-top:
+    15px;
+
+  border:
+    none;
+
+  border-radius:
+    10px;
+
+  background:
+    #455a64;
+
+  color:
+    white;
+
+  padding:
+    11px;
+
+  font-family:
+    inherit;
+
+  font-size:
+    16px;
+
+  font-weight:
+    800;
+
+  cursor:
+    pointer;
+
+}
+
+
+/* ============================================================
+   圖片
+============================================================ */
+
+.image-viewer {
+
+  width:
+    min(
+      1100px,
+      100%
+    );
+
+  height:
+    min(
+      90vh,
+      calc(
+        var(--app-height)
+        -
+        20px
+      )
+    );
+
+  background:
+    #111;
+
+  border-radius:
+    14px;
+
+  padding:
+    8px;
+
+  display:
+    grid;
+
+  grid-template-rows:
+    auto
+    minmax(0, 1fr);
+
+  gap:
+    7px;
+
+}
+
+
+.image-viewer-bar {
+
+  display:
+    flex;
+
+  justify-content:
+    flex-end;
+
+}
+
+
+.close-image-btn {
+
+  border:
+    none;
+
+  border-radius:
+    8px;
+
+  background:
+    white;
+
+  padding:
+    7px 13px;
+
+  font-family:
+    inherit;
+
+  font-weight:
+    800;
+
+  cursor:
+    pointer;
+
+}
+
+
+.image-container {
+
+  min-height:
+    0;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  overflow:
+    auto;
+
+}
+
+
+.image-container img {
+
+  display:
+    block;
+
+  max-width:
+    100%;
+
+  max-height:
+    100%;
+
+  object-fit:
+    contain;
+
+}
+
+
+/* ============================================================
+   設定
+============================================================ */
+
+.settings-modal {
+
+  width:
+    min(
+      460px,
+      94vw
+    );
+
+}
+
+
+.settings-title {
+
+  margin:
+    0 0 14px;
+
+  font-size:
+    24px;
+
+}
+
+
+.settings-info {
+
+  background:
+    #f5f7fa;
+
+  border-radius:
+    10px;
+
+  padding:
+    12px;
+
+  margin-bottom:
+    12px;
+
+  line-height:
+    1.7;
+
+  color:
+    #546e7a;
+
+  font-size:
+    14px;
+
+}
+
+
+.settings-button {
+
+  width:
+    100%;
+
+  border:
+    none;
+
+  border-radius:
+    9px;
+
+  padding:
+    10px;
+
+  margin-top:
+    7px;
+
+  font-family:
+    inherit;
+
+  font-size:
+    14px;
+
+  font-weight:
+    800;
+
+  cursor:
+    pointer;
+
+}
+
+
+.switch-btn {
+
+  background:
+    #1976d2;
+
+  color:
+    white;
+
+}
+
+
+.sync-btn {
+
+  background:
+    #00897b;
+
+  color:
+    white;
+
+}
+
+
+.danger-btn {
+
+  background:
+    #c62828;
+
+  color:
+    white;
+
+}
+
+
+.close-btn {
+
+  background:
+    #eceff1;
+
+  color:
+    #455a64;
+
+}
+
+
+/* ============================================================
+   V1.3 本局題庫設定
+============================================================ */
+
+.question-bank-panel {
+  margin: 12px 0;
+  padding: 12px;
+  border: 1px solid #dfe6ec;
+  border-radius: 10px;
+  background: #fafcfe;
+}
+
+.question-bank-title {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 900;
+  color: #37474f;
+}
+
+.question-bank-actions {
+  display: flex;
+  gap: 7px;
+  margin-bottom: 8px;
+}
+
+.question-bank-mini-btn {
+  border: 1px solid #b0bec5;
+  border-radius: 7px;
+  background: white;
+  padding: 6px 9px;
+  font-family: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.question-bank-list {
+  max-height: 210px;
+  overflow-y: auto;
+  border: 1px solid #eceff1;
+  border-radius: 8px;
+  background: white;
+  padding: 5px 9px;
+}
+
+.question-bank-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 2px;
+  border-bottom: 1px solid #f0f2f4;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.question-bank-item:last-child { border-bottom: none; }
+.question-bank-item input { flex: 0 0 auto; }
+.question-bank-item span { flex: 1 1 auto; }
+.question-bank-item strong { flex: 0 0 auto; color: #607d8b; }
+
+.question-bank-summary {
+  margin-top: 9px;
+  color: #546e7a;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.question-count-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 9px;
+}
+
+.question-count-row label { font-size: 14px; font-weight: 800; }
+.question-count-input {
+  width: 86px;
+  border: 1px solid #b0bec5;
+  border-radius: 7px;
+  padding: 7px;
+  font-family: inherit;
+  font-size: 15px;
+  text-align: center;
+}
+
+.build-set-btn { background: #ff9800; color: white; }
+
+/* ============================================================
+   Toast
+============================================================ */
+
+.toast {
+
+  position:
+    fixed;
+
+  z-index:
+    3000;
+
+  left:
+    50%;
+
+  bottom:
+    max(
+      18px,
+      calc(
+        var(--safe-bottom)
+        +
+        10px
+      )
+    );
+
+  transform:
+    translateX(-50%);
+
+  max-width:
+    90vw;
+
+  background:
+    #263238;
+
+  color:
+    white;
+
+  padding:
+    9px 18px;
+
+  border-radius:
+    30px;
+
+  font-size:
+    14px;
+
+  opacity:
+    0;
+
+  pointer-events:
+    none;
+
+  transition:
+    opacity .2s;
+
+  white-space:
+    nowrap;
+
+  overflow:
+    hidden;
+
+  text-overflow:
+    ellipsis;
+
+}
+
+
+.toast.show {
+
+  opacity:
+    1;
+
+}
+
+
+/* ============================================================
+   iPad
+============================================================ */
+
+@media
+(max-width: 900px) {
+
+  :root {
+
+    --gap:
+      3px;
+
+  }
+
+
+  .topbar {
+
+    min-height:
+      34px;
+
+    padding:
+      3px 5px;
+
+  }
+
+
+  .top-left {
+
+    gap:
+      5px;
+
+  }
+
+
+  .class-badge {
+
+    max-width:
+      120px;
+
+    padding:
+      4px 6px;
+
+  }
+
+
+  .small-btn {
+
+    padding:
+      4px 7px;
+
+  }
+
+
+  .board {
+
+    padding:
+      4px;
+
+  }
+
+
+  .card-number {
+
+    width:
+      clamp(
+        24px,
+        5vw,
+        38px
+      );
+
+    height:
+      clamp(
+        24px,
+        5vw,
+        38px
+      );
+
+    font-size:
+      clamp(
+        11px,
+        2.3vw,
+        18px
+      );
+
+    border-width:
+      1px;
+
+  }
+
+}
+
+
+/* ============================================================
+   高度較小
+============================================================ */
+
+@media
+(max-height: 600px) {
+
+  .topbar {
+
+    min-height:
+      29px;
+
+  }
+
+
+  .class-badge {
+
+    padding:
+      3px 5px;
+
+  }
+
+
+  .mini-stat {
+
+    font-size:
+      8px;
+
+  }
+
+
+  .mini-stat strong {
+
+    font-size:
+      13px;
+
+  }
+
+
+  .small-btn {
+
+    min-height:
+      25px;
+
+    padding:
+      3px 6px;
+
+    font-size:
+      9px;
+
+  }
+
+}
+
+
+/* ============================================================
+   V1.4 三模式選題
+============================================================ */
+
+.selection-mode-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7px;
+  margin: 8px 0 10px;
+}
+
+.selection-mode-option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-height: 38px;
+  border: 1px solid #cfd8dc;
+  border-radius: 8px;
+  background: #fff;
+  padding: 6px 8px;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.selection-mode-option input {
+  margin: 0;
+}
+
+.mode-help {
+  margin: 0 0 9px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: #eef5fb;
+  color: #546e7a;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.quota-input {
+  flex: 0 0 70px;
+  width: 70px;
+  padding: 5px 6px;
+  border: 1px solid #b0bec5;
+  border-radius: 7px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.manual-question-panel {
+  display: none;
+  margin-top: 10px;
+  border-top: 1px solid #dfe6ec;
+  padding-top: 10px;
+}
+
+.manual-question-panel.show {
+  display: block;
+}
+
+.manual-question-list {
+  max-height: 260px;
+  overflow-y: auto;
+  border: 1px solid #dfe6ec;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.manual-question-item {
+  display: grid;
+  grid-template-columns: auto 86px minmax(0, 1fr);
+  gap: 8px;
+  align-items: start;
+  padding: 8px 9px;
+  border-bottom: 1px solid #eef2f5;
+  font-size: 12px;
+  line-height: 1.45;
+  cursor: pointer;
+}
+
+.manual-question-item:last-child {
+  border-bottom: none;
+}
+
+.manual-question-id {
+  font-weight: 900;
+  color: #1565c0;
+}
+
+.manual-question-text {
+  color: #455a64;
+}
+
+.manual-question-actions {
+  display: flex;
+  gap: 7px;
+  margin: 8px 0;
+}
+
+@media (max-width: 700px) {
+  .selection-mode-row {
+    grid-template-columns: 1fr;
+  }
+
+  .manual-question-item {
+    grid-template-columns: auto 74px minmax(0, 1fr);
+  }
+}
+
+
+/* ============================================================
+   V1.4.1 設定視窗重新排版
+============================================================ */
+
+.settings-modal {
+  width: min(1080px, 96vw);
+  padding: clamp(12px, 1.5vw, 20px);
+}
+
+.settings-title {
+  margin: 0 0 8px;
+}
+
+.settings-info {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  padding: 8px 10px;
+  margin-bottom: 9px;
+  line-height: 1.35;
+  font-size: 13px;
+}
+
+.settings-info .stat-cell {
+  min-width: 0;
+  border-radius: 8px;
+  background: #fff;
+  padding: 7px 8px;
+  text-align: center;
+}
+
+.settings-info .stat-label {
+  display: block;
+  color: #78909c;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.settings-info .stat-value {
+  display: block;
+  color: #37474f;
+  font-size: 16px;
+  font-weight: 900;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.question-bank-panel {
+  margin: 0;
+  padding: 10px;
+}
+
+.selection-mode-row {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0 0 8px;
+}
+
+.selection-mode-option {
+  min-height: 36px;
+  padding: 5px 7px;
+}
+
+.mode-help {
+  margin-bottom: 8px;
+  padding: 7px 9px;
+}
+
+.v141-workspace {
+  display: grid;
+  grid-template-columns: minmax(260px, 38%) minmax(0, 1fr);
+  gap: 10px;
+  min-height: 0;
+}
+
+.v141-left,
+.v141-right {
+  min-width: 0;
+  min-height: 0;
+}
+
+.v141-section-title {
+  margin: 0 0 6px;
+  color: #37474f;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.question-bank-actions {
+  margin-bottom: 6px;
+}
+
+.question-bank-list {
+  max-height: 290px;
+}
+
+.v141-right-box {
+  border: 1px solid #dfe6ec;
+  border-radius: 9px;
+  background: #fff;
+  padding: 9px;
+  min-height: 175px;
+}
+
+#questionBankSummary {
+  margin: 0 0 8px;
+}
+
+#randomCountRow {
+  margin: 7px 0;
+}
+
+.manual-question-panel {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.manual-question-list {
+  max-height: 285px;
+}
+
+.v141-bottom-actions {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 7px;
+  margin-top: 9px;
+}
+
+.v141-bottom-actions .settings-button {
+  margin-top: 0;
+}
+
+.build-set-btn {
+  margin-top: 9px;
+}
+
+@media (max-width: 820px) {
+  .settings-info {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .v141-workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .question-bank-list {
+    max-height: 190px;
+  }
+
+  .manual-question-list {
+    max-height: 220px;
+  }
+
+  .v141-bottom-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .selection-mode-row {
+    grid-template-columns: 1fr;
+  }
+
+  .settings-info {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .v141-bottom-actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+.v142-version-badge {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 3px 7px;
+  border-radius: 999px;
+  background: #e3f2fd;
+  color: #1565c0;
+  font-size: 11px;
+  font-weight: 900;
+  vertical-align: middle;
+}
+
+
+/* ============================================================
+   V1.4.5 教室投影大字版
+   只放大題目／答案視窗，不影響設定、選班與題目牆。
+============================================================ */
+
+#questionOverlay .modal {
+  width: min(1180px, 94vw);
+  max-height: min(92vh, calc(var(--app-height) - 24px));
+  padding: clamp(20px, 2.2vw, 34px);
+}
+
+#questionOverlay .question-header {
+  margin-bottom: clamp(14px, 1.6vh, 22px);
+  padding-bottom: clamp(10px, 1.2vh, 16px);
+}
+
+#questionOverlay .question-number {
+  font-size: clamp(28px, 2.5vw, 42px);
+  line-height: 1.25;
+}
+
+#questionOverlay .category {
+  padding: 7px 15px;
+  font-size: clamp(16px, 1.35vw, 22px);
+}
+
+#questionOverlay .question-text {
+  margin-bottom: clamp(18px, 2vh, 26px);
+  font-size: clamp(28px, 2.55vw, 42px);
+  line-height: 1.5;
+}
+
+#questionOverlay .choices {
+  gap: clamp(10px, 1.2vh, 15px);
+}
+
+#questionOverlay .choice {
+  min-height: 72px;
+  padding: clamp(13px, 1.5vh, 19px) 20px;
+  border-width: 3px;
+  border-radius: 14px;
+  gap: 15px;
+  font-size: clamp(22px, 1.9vw, 31px);
+  line-height: 1.4;
+}
+
+#questionOverlay .choice-letter {
+  width: clamp(44px, 3.4vw, 58px);
+  height: clamp(44px, 3.4vw, 58px);
+  font-size: clamp(22px, 1.8vw, 29px);
+}
+
+#questionOverlay .answer-actions {
+  margin-top: clamp(18px, 2vh, 26px);
+  gap: 12px;
+}
+
+#questionOverlay .primary-btn,
+#questionOverlay .secondary-btn {
+  min-height: 54px;
+  padding: 12px 30px;
+  font-size: clamp(19px, 1.5vw, 24px);
+  border-radius: 11px;
+}
+
+/* 答案結果 */
+#questionOverlay .result-banner {
+  padding: clamp(17px, 2vh, 24px);
+  margin-bottom: clamp(16px, 1.8vh, 22px);
+  font-size: clamp(30px, 2.6vw, 44px);
+  border-radius: 15px;
+}
+
+#questionOverlay .answer-box {
+  padding: clamp(20px, 2.2vw, 30px);
+  border-radius: 14px;
+  font-size: clamp(21px, 1.8vw, 29px);
+  line-height: 1.7;
+}
+
+#questionOverlay .answer-box > div:not(.explanation) {
+  margin-bottom: 5px;
+}
+
+#questionOverlay .explanation {
+  margin-top: 16px;
+  padding-top: 16px;
+}
+
+#questionOverlay .explanation > strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: clamp(23px, 2vw, 32px);
+}
+
+#questionOverlay #explanationText {
+  font-size: clamp(22px, 1.9vw, 31px);
+  line-height: 1.65;
+}
+
+#questionOverlay .source {
+  margin-top: 13px;
+  font-size: clamp(16px, 1.3vw, 21px);
+  line-height: 1.5;
+}
+
+#questionOverlay .return-btn {
+  min-height: 58px;
+  margin-top: 18px;
+  padding: 13px 18px;
+  font-size: clamp(21px, 1.7vw, 27px);
+  border-radius: 12px;
+}
+
+#questionOverlay .view-image-btn {
+  padding: 10px 16px;
+  font-size: clamp(17px, 1.35vw, 21px);
+}
+
+/* 低高度螢幕：仍維持大字，但略縮以避免內容超出 */
+@media (max-height: 760px) {
+  #questionOverlay .modal {
+    width: min(1180px, 96vw);
+    max-height: 96vh;
+    padding: 16px 22px;
+  }
+
+  #questionOverlay .question-number {
+    font-size: clamp(24px, 2.2vw, 34px);
+  }
+
+  #questionOverlay .question-text {
+    font-size: clamp(24px, 2.25vw, 34px);
+    margin-bottom: 14px;
+  }
+
+  #questionOverlay .choice {
+    min-height: 58px;
+    padding: 10px 16px;
+    font-size: clamp(19px, 1.7vw, 26px);
+  }
+
+  #questionOverlay .answer-box {
+    font-size: clamp(19px, 1.65vw, 25px);
+    padding: 16px 20px;
+  }
+
+  #questionOverlay #explanationText {
+    font-size: clamp(20px, 1.7vw, 26px);
+  }
+}
+
+
+/* ============================================================
+   V1.4.6 答案圖片近全畫面顯示
+   原則：盡量放大，但完整圖片一定保留，不裁切。
+============================================================ */
+
+#imageOverlay {
+  padding:
+    max(4px, var(--safe-top))
+    max(4px, var(--safe-right))
+    max(4px, var(--safe-bottom))
+    max(4px, var(--safe-left));
+}
+
+#imageOverlay .image-viewer {
+  width: min(98vw, 1600px);
+  height: min(97vh, calc(var(--app-height) - 8px));
+  max-width: calc(100vw - 8px);
+  max-height: calc(var(--app-height) - 8px);
+  padding: 5px;
+  gap: 4px;
+  border-radius: 10px;
+  background: #111;
+  overflow: hidden;
+}
+
+#imageOverlay .image-viewer-bar {
+  min-height: 38px;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 2px;
+}
+
+#imageOverlay .close-image-btn {
+  min-height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 7px;
+}
+
+#imageOverlay .image-container {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#imageOverlay .image-container img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center center;
+}
+
+/* 寬螢幕 / 教室投影：再多利用一點水平與垂直空間 */
+@media (min-width: 1000px) {
+  #imageOverlay .image-viewer {
+    width: 99vw;
+    height: min(98vh, calc(var(--app-height) - 6px));
+    max-width: calc(100vw - 6px);
+    max-height: calc(var(--app-height) - 6px);
+  }
+}
+
+/* 手機或窄螢幕仍完整顯示，不裁切 */
+@media (max-width: 700px) {
+  #imageOverlay .image-viewer {
+    width: 100%;
+    height: min(96vh, calc(var(--app-height) - 8px));
+  }
+
+  #imageOverlay .close-image-btn {
+    font-size: 13px;
+  }
+}
+
+
+/* ============================================================
+   V1.4.7 已答題可重新查看
+============================================================ */
+
+.review-setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 9px 0 0;
+  padding: 10px 12px;
+  border: 1px solid #dfe6ec;
+  border-radius: 9px;
+  background: #f7fafc;
+}
+
+.review-setting-text {
+  min-width: 0;
+}
+
+.review-setting-title {
+  font-size: 14px;
+  font-weight: 900;
+  color: #37474f;
+}
+
+.review-setting-note {
+  margin-top: 2px;
+  font-size: 12px;
+  line-height: 1.45;
+  color: #78909c;
+}
+
+.review-toggle {
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+}
+
+.card.used.review-enabled {
+  cursor: pointer;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card.used.review-enabled:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 5px 11px rgba(0,0,0,.23);
+  }
+}
+
+
+/* ============================================================
+   V1.4.9 操作使用說明
+============================================================ */
+
+.help-btn {
+  background: #7e57c2;
+  color: white;
+}
+
+.help-modal {
+  width: min(860px, 94vw);
+  max-height: min(90vh, calc(var(--app-height) - 20px));
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.help-title {
+  margin: 0 0 10px;
+  font-size: clamp(24px, 2.2vw, 34px);
+  color: #37474f;
+}
+
+.help-scroll {
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+.help-section {
+  margin: 0 0 12px;
+  padding: 12px 14px;
+  border: 1px solid #e0e6eb;
+  border-radius: 10px;
+  background: #f8fafc;
+}
+
+.help-section h3 {
+  margin: 0 0 7px;
+  font-size: 18px;
+  color: #263238;
+}
+
+.help-section p {
+  margin: 4px 0;
+  line-height: 1.65;
+  font-size: 15px;
+  color: #455a64;
+}
+
+.help-section ul {
+  margin: 6px 0 0 20px;
+  padding: 0;
+  color: #455a64;
+}
+
+.help-section li {
+  margin: 5px 0;
+  line-height: 1.55;
+  font-size: 15px;
+}
+
+.help-close-btn {
+  width: 100%;
+  margin-top: 10px;
+  border: none;
+  border-radius: 10px;
+  min-height: 46px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 900;
+  cursor: pointer;
+  background: #eceff1;
+  color: #455a64;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==========================================================
+     主畫面
+========================================================== -->
+
+<div class="app">
+
+
+  <div class="topbar">
+
+
+    <div class="top-left">
+
+
+      <div
+        id="classBadge"
+        class="class-badge"
+      >
+        尚未選班
+      </div>
+
+
+      <div class="mini-stat">
+
+        完成
+
+        <strong id="finishedCount">
+          0
+        </strong>
+
+        /
+
+        <strong id="totalCount">
+          0
+        </strong>
+
+      </div>
+
+
+      <div class="mini-stat correct">
+
+        ✓
+
+        <strong id="correctCount">
+          0
+        </strong>
+
+      </div>
+
+
+      <div class="mini-stat wrong">
+
+        ✕
+
+        <strong id="wrongCount">
+          0
+        </strong>
+
+      </div>
+
+
+      <div
+        id="syncStatus"
+        class="sync-status local"
+      >
+        ☁ 尚未同步
+      </div>
+
+
+    </div>
+
+
+    <div class="top-actions">
+
+
+      <button
+        class="small-btn random-btn"
+        onclick="randomQuestion()"
+      >
+        🎲 隨機
+      </button>
+
+
+      <button
+        id="fullscreenBtn"
+        class="small-btn fullscreen-btn"
+        onclick="toggleFullscreen()"
+        title="切換全螢幕"
+      >
+        ⛶ 全螢幕
+      </button>
+
+
+      <button
+        class="small-btn help-btn"
+        onclick="openHelp()"
+        title="操作使用說明"
+        aria-label="操作使用說明"
+      >
+        ❔
+      </button>
+
+
+      <button
+        class="small-btn menu-btn"
+        onclick="openSettings()"
+      >
+        ⋯
+      </button>
+
+
+    </div>
+
+
+  </div>
+
+
+  <main class="board">
+
+
+    <div
+      id="cardContainer"
+      class="cards"
+    >
+
+      <div class="loading">
+        系統載入中……
+      </div>
+
+    </div>
+
+
+  </main>
+
+
+</div>
+
+
+<!-- ==========================================================
+     開場 / 選班
+========================================================== -->
+
+<div
+  id="classOverlay"
+  class="overlay"
+>
+
+
+  <div class="modal start-modal">
+
+
+    <div class="start-icon">
+      🏫
+    </div>
+
+
+    <h1 class="start-title">
+      校園生活50問
+    </h1>
+
+
+    <p class="start-text">
+      請選擇本節課使用的班級
+    </p>
+
+
+    <select
+      id="classSelect"
+      class="class-select"
+      onchange="updateClassButton()"
+    >
+
+      <option value="">
+        載入班級中……
+      </option>
+
+    </select>
+
+
+    <button
+      id="enterClassBtn"
+      class="start-btn"
+      onclick="enterSelectedClass()"
+      disabled
+    >
+      開始 / 繼續
+    </button>
+
+
+  </div>
+
+
+</div>
+
+
+<!-- ==========================================================
+     題目
+========================================================== -->
+
+<div
+  id="questionOverlay"
+  class="overlay"
+>
+
+
+  <div class="modal">
+
+
+    <div id="questionArea">
+
+
+      <div class="question-header">
+
+
+        <div
+          id="questionNumber"
+          class="question-number"
+        >
+        </div>
+
+
+        <div
+          id="questionCategory"
+          class="category"
+        >
+        </div>
+
+
+      </div>
+
+
+      <div
+        id="questionImageBlock"
+        class="question-image-block"
+      >
+
+        <div
+          id="questionImageFrame"
+          class="question-image-frame"
+          onclick="openQuestionStemImage()"
+          title="點一下可放大題目圖片"
+        >
+          <img
+            id="questionStemImage"
+            alt="題目圖片"
+          >
+        </div>
+
+        <div
+          id="questionImageError"
+          class="question-image-error"
+        >
+          圖片載入失敗，請重新整理或告知老師。
+        </div>
+
+      </div>
+
+
+      <div
+        id="questionText"
+        class="question-text"
+      >
+      </div>
+
+
+      <div
+        id="choices"
+        class="choices"
+      >
+      </div>
+
+
+      <div class="answer-actions">
+
+
+        <button
+          class="secondary-btn"
+          onclick="closeQuestion()"
+        >
+          返回
+        </button>
+
+
+        <button
+          id="submitBtn"
+          class="primary-btn"
+          onclick="submitAnswer()"
+          disabled
+        >
+          確認答案
+        </button>
+
+
+      </div>
+
+
+    </div>
+
+
+    <div
+      id="resultArea"
+      class="result"
+    >
+
+
+      <div
+        id="resultBanner"
+        class="result-banner"
+      >
+      </div>
+
+
+      <div class="answer-box">
+
+
+        <div>
+
+          <strong>
+            你的答案：
+          </strong>
+
+          <span id="yourAnswer">
+          </span>
+
+        </div>
+
+
+        <div>
+
+          <strong>
+            正確答案：
+          </strong>
+
+          <span id="correctAnswer">
+          </span>
+
+        </div>
+
+
+        <div class="explanation">
+
+          <strong>
+            答案解析
+          </strong>
+
+          <div id="explanationText">
+          </div>
+
+        </div>
+
+
+        <div
+          id="sourceText"
+          class="source"
+        >
+        </div>
+
+
+      </div>
+
+
+      <div
+        id="imageAction"
+        class="image-action"
+      >
+
+        <button
+          class="view-image-btn"
+          onclick="openQuestionImage()"
+        >
+          🖼 查看答案／宣導圖片
+        </button>
+
+      </div>
+
+
+      <button
+        class="return-btn"
+        onclick="finishQuestion()"
+      >
+        返回題目牆
+      </button>
+
+
+    </div>
+
+
+  </div>
+
+
+</div>
+
+
+<!-- ==========================================================
+     圖片
+========================================================== -->
+
+<div
+  id="imageOverlay"
+  class="overlay"
+  style="z-index:2000;"
+>
+
+
+  <div class="image-viewer">
+
+
+    <div class="image-viewer-bar">
+
+
+      <button
+        class="close-image-btn"
+        onclick="closeQuestionImage()"
+      >
+        ✕ 關閉圖片
+      </button>
+
+
+    </div>
+
+
+    <div class="image-container">
+
+
+      <img
+        id="questionImage"
+        alt="題目圖片"
+      >
+
+
+    </div>
+
+
+  </div>
+
+
+</div>
+
+
+<!-- ==========================================================
+     V1.4.9 操作使用說明
+========================================================== -->
+
+<div
+  id="helpOverlay"
+  class="overlay"
+>
+
+  <div class="modal help-modal">
+
+    <h2 class="help-title">
+      ❔ 校園生活50問｜操作使用說明
+    </h2>
+
+    <div class="help-scroll">
+
+      <div class="help-section">
+        <h3>1. 開始使用</h3>
+        <p>進入系統後先選擇班級，再按「開始 / 繼續」。系統會載入該班目前的答題進度。</p>
+      </div>
+
+      <div class="help-section">
+        <h3>2. 題目卡牌</h3>
+        <ul>
+          <li>卡牌上的 01、02、03……是本局流水號，不是資料庫題號。</li>
+          <li>尚未作答：藍色；答對：綠色；答錯：紅色。</li>
+          <li>點開題目後，上方會顯示題庫編號，方便日後回到題庫修改。</li>
+        </ul>
+      </div>
+
+      <div class="help-section">
+        <h3>3. 三種選題模式</h3>
+        <ul>
+          <li><strong>整體亂數：</strong>勾選題庫後，從所有已選題庫的啟用題目中亂數抽取指定題數。</li>
+          <li><strong>題庫配額：</strong>每個題庫各自設定抽幾題，各題庫內先亂數抽題，再混合洗牌。</li>
+          <li><strong>手動選題：</strong>勾選題庫後，再逐題選擇要加入本局的題目。</li>
+        </ul>
+        <p>本局最多 50 題；若實際可用題目較少，就以實際題數建立卡牌，不重複補題。</p>
+      </div>
+
+      <div class="help-section">
+        <h3>4. 隨機抽題</h3>
+        <p>右上角「🎲 隨機」會從目前尚未完成的題目中隨機開啟一題。</p>
+      </div>
+
+      <div class="help-section">
+        <h3>5. 已答題再次查看</h3>
+        <p>設定中的「已答題可再次查看」預設為開啟。開啟後，綠色或紅色卡牌仍可點開查看題目，但不會重新計分。</p>
+      </div>
+
+      <div class="help-section">
+        <h3>6. 答錯題重答</h3>
+        <p>設定中的「答錯題可再次作答」預設為關閉。</p>
+        <p>開啟後，紅色卡牌可由主持人決定何時再給學生機會作答；如果後來答對，卡牌會由紅色變成綠色。</p>
+        <p>系統不限制重答次數，也不記錄重答次數；已經答對的題目不會再變回紅色。</p>
+      </div>
+
+      <div class="help-section">
+        <h3>7. 題目與答案圖片</h3>
+        <p>有圖片的題目可點圖放大。答案圖片會盡量接近全畫面顯示，並保持完整比例，不裁切。</p>
+      </div>
+
+      <div class="help-section">
+        <h3>8. 全螢幕</h3>
+        <p>右上角「⛶ 全螢幕」可切換全螢幕模式，方便教室投影。進入後按鈕會變成「離開全螢幕」。</p>
+      </div>
+
+      <div class="help-section">
+        <h3>9. 設定、同步與重置</h3>
+        <ul>
+          <li><strong>⋯：</strong>開啟遊戲設定。</li>
+          <li><strong>立即同步：</strong>把目前班級進度同步到 Google Sheet。</li>
+          <li><strong>切換班級：</strong>保留目前班進度後切換其他班級。</li>
+          <li><strong>重新開始目前班級：</strong>清除目前班級本局進度，其他班級不受影響。</li>
+        </ul>
+      </div>
+
+      <div class="help-section">
+        <h3>10. 使用原則</h3>
+        <p>建議先完成選題設定，再開始正式作答。建立本局題組後，題目會固定，不會因重新整理頁面而重新亂抽。</p>
+      </div>
+
+    </div>
+
+    <button
+      class="help-close-btn"
+      onclick="closeHelp()"
+    >
+      關閉使用說明
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- ==========================================================
+     設定
+========================================================== -->
+
+<div
+  id="settingsOverlay"
+  class="overlay"
+>
+
+  <div class="modal settings-modal">
+
+    <h2 class="settings-title">
+      遊戲設定 <span class="v142-version-badge">V1.4.9</span>
+    </h2>
+
+    <div
+      id="settingsInfo"
+      class="settings-info"
+    >
+    </div>
+
+    <div class="question-bank-panel">
+
+      <div class="selection-mode-row">
+        <label class="selection-mode-option">
+          <input type="radio" name="selectionMode" value="random" onchange="changeSelectionMode('random')">
+          ① 整體亂數
+        </label>
+
+        <label class="selection-mode-option">
+          <input type="radio" name="selectionMode" value="quota" onchange="changeSelectionMode('quota')">
+          ② 題庫配額
+        </label>
+
+        <label class="selection-mode-option">
+          <input type="radio" name="selectionMode" value="manual" onchange="changeSelectionMode('manual')">
+          ③ 手動選題
+        </label>
+      </div>
+
+      <div id="selectionModeHelp" class="mode-help"></div>
+
+      <div class="v141-workspace">
+
+        <div class="v141-left">
+          <div class="v141-section-title">題庫</div>
+
+          <div class="question-bank-actions">
+            <button class="question-bank-mini-btn" onclick="selectAllBanks(true)">全選</button>
+            <button class="question-bank-mini-btn" onclick="selectAllBanks(false)">取消全選</button>
+          </div>
+
+          <div id="questionBankList" class="question-bank-list"></div>
+        </div>
+
+        <div class="v141-right">
+          <div class="v141-section-title">本局設定</div>
+
+          <div class="v141-right-box">
+
+            <div id="questionBankSummary" class="question-bank-summary"></div>
+
+            <label class="review-setting-row">
+              <div class="review-setting-text">
+                <div class="review-setting-title">已答題可再次查看</div>
+                <div class="review-setting-note">開啟後，綠色／紅色卡牌仍可點選查看題目；不會重新作答或改變成績。</div>
+              </div>
+
+              <input
+                id="reviewAnsweredToggle"
+                class="review-toggle"
+                type="checkbox"
+                checked
+                onchange="setReviewAnsweredEnabledFromUi()"
+              >
+            </label>
+
+            <label class="review-setting-row">
+              <div class="review-setting-text">
+                <div class="review-setting-title">答錯題可再次作答</div>
+                <div class="review-setting-note">預設關閉。開啟後，紅色卡牌可再次進入並重新作答；答對後改為綠色。系統不限制重答次數，由主持人控制。</div>
+              </div>
+
+              <input
+                id="retryWrongToggle"
+                class="review-toggle"
+                type="checkbox"
+                onchange="setRetryWrongEnabledFromUi()"
+              >
+            </label>
+
+            <div id="randomCountRow" class="question-count-row">
+              <label for="questionCountInput">本局使用題數</label>
+              <input id="questionCountInput" class="question-count-input" type="number" min="1" max="50" value="50" oninput="updateQuestionBankSummary()">
+            </div>
+
+            <div id="manualQuestionPanel" class="manual-question-panel">
+              <div class="manual-question-actions">
+                <button class="question-bank-mini-btn" onclick="selectVisibleManualQuestions(true)">全選目前題目</button>
+                <button class="question-bank-mini-btn" onclick="selectVisibleManualQuestions(false)">取消目前題目</button>
+              </div>
+
+              <div id="manualQuestionList" class="manual-question-list"></div>
+            </div>
+
+            <button class="settings-button build-set-btn" onclick="buildQuestionSet()">
+              🎲 建立本局題組
+            </button>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="v141-bottom-actions">
+
+      <button
+        class="settings-button switch-btn"
+        onclick="switchClass()"
+      >
+        切換班級
+      </button>
+
+      <button
+        class="settings-button sync-btn"
+        onclick="manualSync()"
+      >
+        ☁ 立即同步
+      </button>
+
+      <button
+        class="settings-button danger-btn"
+        onclick="requestResetClass()"
+      >
+        重新開始目前班級
+      </button>
+
+      <button
+        class="settings-button close-btn"
+        onclick="closeSettings()"
+      >
+        返回遊戲
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ==========================================================
+     Toast
+========================================================== -->
+
+<div
+  id="toast"
+  class="toast"
+>
+</div>
+
+
+
+<script>
+
+/* ============================================================
+   Storage
+============================================================ */
+
+const STORAGE_PREFIX =
+  "campus50_class_";
+
+const LAST_CLASS_KEY =
+  "campus50_last_class";
+
+const BANK_SETTING_KEY =
+  "campus50_bank_setting_v13";
+
+const REVIEW_ANSWERED_KEY =
+  "campus50_review_answered_v147";
+
+const RETRY_WRONG_KEY =
+  "campus50_retry_wrong_v148";
+
+
+/* ============================================================
+   全域
+============================================================ */
+
+let allQuestions =
+  [];
+
+let questionBankSummary =
+  [];
+
+let questions =
+  [];
+
+let classes =
+  [];
+
+let currentClass =
+  null;
+
+let currentQuestion =
+  null;
+
+let selectedAnswer =
+  null;
+
+let gameData =
+  createEmptyGameData();
+
+let syncInProgress =
+  false;
+
+let syncQueued =
+  false;
+
+/*
+  V1.4.2 初始化狀態：
+  班級、題庫摘要、完整題目分開讀取。
+  題庫摘要不阻塞啟動；班級與完整題目都完成後才進入班級。
+*/
+let initClassesReady =
+  false;
+
+let initQuestionsReady =
+  false;
+
+let initStartupDone =
+  false;
+
+
+/* ============================================================
+   V1.4 三模式選題
+============================================================ */
+
+function getCategoryGroups() {
+  const map = {};
+
+  allQuestions.forEach(
+    function(question) {
+      const category =
+        String(
+          question.category ||
+          "未分類"
+        ).trim();
+
+      if (!map[category]) {
+        map[category] = [];
+      }
+
+      map[category].push(question);
+    }
+  );
+
+  return map;
+}
+
+
+function applySavedQuestionSet() {
+  const ids =
+    Array.isArray(gameData.questionIds)
+      ? gameData.questionIds.map(String)
+      : [];
+
+  if (ids.length === 0) {
+    questions =
+      allQuestions.slice(
+        0,
+        Math.min(
+          50,
+          allQuestions.length
+        )
+      );
+    return;
+  }
+
+  const idSet =
+    new Set(ids);
+
+  questions =
+    allQuestions.filter(
+      function(question) {
+        return idSet.has(
+          String(question.id)
+        );
+      }
+    );
+
+  if (questions.length === 0) {
+    questions =
+      allQuestions.slice(
+        0,
+        Math.min(
+          50,
+          allQuestions.length
+        )
+      );
+  }
+}
+
+
+function getDefaultSelectionSetting() {
+  return {
+    mode: "random",
+    categories: [],
+    count: 50,
+    quotaCounts: {},
+    manualIds: []
+  };
+}
+
+
+function getSavedBankSetting() {
+  try {
+    const raw =
+      localStorage.getItem(
+        BANK_SETTING_KEY
+      );
+
+    if (!raw) {
+      return getDefaultSelectionSetting();
+    }
+
+    const parsed =
+      JSON.parse(raw);
+
+    return {
+      mode:
+        ["random", "quota", "manual"]
+          .includes(parsed.mode)
+            ? parsed.mode
+            : "random",
+
+      categories:
+        Array.isArray(parsed.categories)
+          ? parsed.categories.map(String)
+          : [],
+
+      count:
+        Number(parsed.count) || 50,
+
+      quotaCounts:
+        parsed.quotaCounts &&
+        typeof parsed.quotaCounts === "object"
+          ? parsed.quotaCounts
+          : {},
+
+      manualIds:
+        Array.isArray(parsed.manualIds)
+          ? parsed.manualIds.map(String)
+          : []
+    };
+
+  } catch (error) {
+    return getDefaultSelectionSetting();
+  }
+}
+
+
+function saveBankSetting(setting) {
+  try {
+    localStorage.setItem(
+      BANK_SETTING_KEY,
+      JSON.stringify(setting)
+    );
+  } catch (error) {
+    console.warn(
+      "題庫設定儲存失敗",
+      error
+    );
+  }
+}
+
+
+function getSelectionMode() {
+  const checked =
+    document.querySelector(
+      'input[name="selectionMode"]:checked'
+    );
+
+  return checked
+    ? checked.value
+    : "random";
+}
+
+
+function changeSelectionMode(mode) {
+  const saved =
+    getSavedBankSetting();
+
+  saved.categories =
+    getCheckedCategories();
+
+  const countInput =
+    document.getElementById(
+      "questionCountInput"
+    );
+
+  if (countInput) {
+    saved.count =
+      Number(countInput.value) ||
+      saved.count;
+  }
+
+  saved.quotaCounts =
+    getQuotaCountsFromUi();
+
+  saved.manualIds =
+    getManualSelectedIds();
+
+  saved.mode =
+    mode;
+
+  saveBankSetting(saved);
+
+  renderQuestionBankSettings();
+}
+
+
+function renderQuestionBankSettings() {
+  const container =
+    document.getElementById(
+      "questionBankList"
+    );
+
+  if (!container) {
+    return;
+  }
+
+  const saved =
+    getSavedBankSetting();
+
+  const currentModeRadio =
+    document.querySelector(
+      'input[name="selectionMode"]:checked'
+    );
+
+  const mode =
+    currentModeRadio
+      ? currentModeRadio.value
+      : saved.mode;
+
+  document
+    .querySelectorAll(
+      'input[name="selectionMode"]'
+    )
+    .forEach(
+      function(radio) {
+        radio.checked =
+          radio.value === mode;
+      }
+    );
+
+  const groups =
+    getCategoryGroups();
+
+  let bankItems = [];
+
+  /*
+    V1.4.2：
+    題庫清單名稱與題數優先使用後端 B欄摘要。
+    這是加入三模式前已驗證可正常工作的資料路徑。
+    完整題目 allQuestions 則另外載入，兩者不再互相綁死。
+  */
+  if (
+    Array.isArray(
+      questionBankSummary
+    ) &&
+    questionBankSummary.length > 0
+  ) {
+
+    bankItems =
+      questionBankSummary.map(
+        function(item) {
+          return {
+            category:
+              String(
+                item.category || ""
+              ).trim(),
+            count:
+              Number(
+                item.count
+              ) || 0
+          };
+        }
+      );
+
+  } else {
+
+    bankItems =
+      Object.keys(groups)
+        .map(
+          function(category) {
+            return {
+              category: category,
+              count: groups[category].length
+            };
+          }
+        );
+
+  }
+
+  if (
+    bankItems.length === 0
+  ) {
+
+    container.innerHTML =
+      '<div class="question-bank-summary">題庫清單載入中……</div>';
+
+    const summary =
+      document.getElementById(
+        "questionBankSummary"
+      );
+
+    if (summary) {
+      summary.innerHTML =
+        "正在讀取 B欄題庫清單";
+    }
+
+    return;
+  }
+
+  let selected = [];
+
+  if (
+    Array.isArray(gameData.selectedCategories) &&
+    gameData.selectedCategories.length > 0
+  ) {
+    selected =
+      gameData.selectedCategories.map(String);
+  } else if (
+    saved.categories.length > 0
+  ) {
+    selected =
+      saved.categories.slice();
+  } else {
+    selected =
+      bankItems.map(
+        function(item) {
+          return item.category;
+        }
+      );
+  }
+
+  container.innerHTML = "";
+
+  bankItems.forEach(
+    function(item) {
+      const category =
+        item.category;
+
+      const label =
+        document.createElement(
+          "label"
+        );
+
+      label.className =
+        "question-bank-item";
+
+      const checkbox =
+        document.createElement(
+          "input"
+        );
+
+      checkbox.type =
+        "checkbox";
+
+      checkbox.value =
+        category;
+
+      checkbox.className =
+        "bank-checkbox";
+
+      checkbox.checked =
+        selected.includes(category);
+
+      checkbox.addEventListener(
+        "change",
+        function() {
+          updateQuestionBankSummary();
+
+          if (
+            getSelectionMode() ===
+            "manual"
+          ) {
+            renderManualQuestionList();
+          }
+        }
+      );
+
+      const name =
+        document.createElement(
+          "span"
+        );
+
+      name.textContent =
+        category;
+
+      const count =
+        document.createElement(
+          "strong"
+        );
+
+      count.textContent =
+        item.count + "題";
+
+      label.appendChild(
+        checkbox
+      );
+
+      label.appendChild(
+        name
+      );
+
+      if (mode === "quota") {
+        const quota =
+          document.createElement(
+            "input"
+          );
+
+        quota.type =
+          "number";
+
+        quota.min =
+          "0";
+
+        quota.max =
+          String(item.count);
+
+        quota.value =
+          String(
+            Math.max(
+              0,
+              Math.min(
+                item.count,
+                Number(
+                  saved.quotaCounts[
+                    category
+                  ]
+                ) || 0
+              )
+            )
+          );
+
+        quota.className =
+          "quota-input";
+
+        quota.dataset.category =
+          category;
+
+        quota.addEventListener(
+          "click",
+          function(event) {
+            event.stopPropagation();
+          }
+        );
+
+        quota.addEventListener(
+          "input",
+          function() {
+            let value =
+              Math.floor(
+                Number(
+                  quota.value
+                ) || 0
+              );
+
+            value =
+              Math.max(
+                0,
+                Math.min(
+                  item.count,
+                  value
+                )
+              );
+
+            quota.value =
+              String(value);
+
+            if (value > 0) {
+              checkbox.checked = true;
+            }
+
+            updateQuestionBankSummary();
+          }
+        );
+
+        label.appendChild(
+          quota
+        );
+      }
+
+      label.appendChild(
+        count
+      );
+
+      container.appendChild(
+        label
+      );
+    }
+  );
+
+  const help =
+    document.getElementById(
+      "selectionModeHelp"
+    );
+
+  const countRow =
+    document.getElementById(
+      "randomCountRow"
+    );
+
+  const manualPanel =
+    document.getElementById(
+      "manualQuestionPanel"
+    );
+
+  if (mode === "random") {
+    help.textContent =
+      "整體亂數：先勾選題庫，再從所有已選題庫的啟用題目中整體亂數抽取指定題數。";
+
+    countRow.style.display =
+      "";
+
+    manualPanel.classList.remove(
+      "show"
+    );
+
+  } else if (mode === "quota") {
+    help.textContent =
+      "題庫配額：每個題庫各自設定抽題數，各題庫內先亂數抽題，再把所有抽中的題目混合洗牌。";
+
+    countRow.style.display =
+      "none";
+
+    manualPanel.classList.remove(
+      "show"
+    );
+
+  } else {
+    help.textContent =
+      "手動選題：先勾選題庫，再從這些題庫目前 M欄＝TRUE 的啟用題目中逐題勾選。最多50題。";
+
+    countRow.style.display =
+      "none";
+
+    manualPanel.classList.add(
+      "show"
+    );
+
+    renderManualQuestionList();
+  }
+
+  const countInput =
+    document.getElementById(
+      "questionCountInput"
+    );
+
+  if (
+    countInput &&
+    mode === "random"
+  ) {
+    countInput.value =
+      Math.max(
+        1,
+        Math.min(
+          50,
+          Number(
+            saved.count
+          ) || 50
+        )
+      );
+  }
+
+  updateQuestionBankSummary();
+}
+
+
+function selectAllBanks(checked) {
+  document
+    .querySelectorAll(
+      ".bank-checkbox"
+    )
+    .forEach(
+      function(box) {
+        box.checked =
+          checked;
+      }
+    );
+
+  updateQuestionBankSummary();
+
+  if (
+    getSelectionMode() ===
+    "manual"
+  ) {
+    renderManualQuestionList();
+  }
+}
+
+
+function getCheckedCategories() {
+  return Array.from(
+    document.querySelectorAll(
+      ".bank-checkbox:checked"
+    )
+  ).map(
+    function(box) {
+      return box.value;
+    }
+  );
+}
+
+
+function getEligibleQuestionsFromSettings() {
+  const selected =
+    new Set(
+      getCheckedCategories()
+    );
+
+  return allQuestions.filter(
+    function(question) {
+      return selected.has(
+        String(
+          question.category ||
+          "未分類"
+        ).trim()
+      );
+    }
+  );
+}
+
+
+function getQuotaCountsFromUi() {
+  const result = {};
+
+  document
+    .querySelectorAll(
+      ".quota-input"
+    )
+    .forEach(
+      function(input) {
+        const category =
+          String(
+            input.dataset.category ||
+            ""
+          );
+
+        const value =
+          Math.max(
+            0,
+            Math.floor(
+              Number(
+                input.value
+              ) || 0
+            )
+          );
+
+        if (
+          category &&
+          value > 0
+        ) {
+          result[category] =
+            value;
+        }
+      }
+    );
+
+  return result;
+}
+
+
+function renderManualQuestionList() {
+  const container =
+    document.getElementById(
+      "manualQuestionList"
+    );
+
+  if (!container) {
+    return;
+  }
+
+  const saved =
+    getSavedBankSetting();
+
+  const selectedIds =
+    new Set(
+      saved.manualIds
+    );
+
+  document
+    .querySelectorAll(
+      ".manual-question-checkbox:checked"
+    )
+    .forEach(
+      function(box) {
+        selectedIds.add(
+          String(box.value)
+        );
+      }
+    );
+
+  const eligible =
+    getEligibleQuestionsFromSettings();
+
+  container.innerHTML = "";
+
+  if (eligible.length === 0) {
+    container.innerHTML =
+      '<div class="question-bank-summary">請先選擇至少一個題庫。</div>';
+    return;
+  }
+
+  eligible.forEach(
+    function(question) {
+      const label =
+        document.createElement(
+          "label"
+        );
+
+      label.className =
+        "manual-question-item";
+
+      const checkbox =
+        document.createElement(
+          "input"
+        );
+
+      checkbox.type =
+        "checkbox";
+
+      checkbox.value =
+        String(
+          question.id
+        );
+
+      checkbox.className =
+        "manual-question-checkbox";
+
+      checkbox.checked =
+        selectedIds.has(
+          String(
+            question.id
+          )
+        );
+
+      checkbox.addEventListener(
+        "change",
+        function() {
+          if (
+            checkbox.checked &&
+            getManualSelectedIds().length > 50
+          ) {
+            checkbox.checked =
+              false;
+
+            showToast(
+              "手動選題最多50題"
+            );
+          }
+
+          updateQuestionBankSummary();
+        }
+      );
+
+      const id =
+        document.createElement(
+          "span"
+        );
+
+      id.className =
+        "manual-question-id";
+
+      id.textContent =
+        String(
+          question.id
+        );
+
+      const text =
+        document.createElement(
+          "span"
+        );
+
+      text.className =
+        "manual-question-text";
+
+      text.textContent =
+        String(
+          question.question ||
+          ""
+        );
+
+      label.appendChild(
+        checkbox
+      );
+
+      label.appendChild(
+        id
+      );
+
+      label.appendChild(
+        text
+      );
+
+      container.appendChild(
+        label
+      );
+    }
+  );
+}
+
+
+function getManualSelectedIds() {
+  return Array.from(
+    document.querySelectorAll(
+      ".manual-question-checkbox:checked"
+    )
+  ).map(
+    function(box) {
+      return String(
+        box.value
+      );
+    }
+  );
+}
+
+
+function selectVisibleManualQuestions(
+  checked
+) {
+  const boxes =
+    Array.from(
+      document.querySelectorAll(
+        ".manual-question-checkbox"
+      )
+    );
+
+  if (!checked) {
+    boxes.forEach(
+      function(box) {
+        box.checked = false;
+      }
+    );
+
+    updateQuestionBankSummary();
+    return;
+  }
+
+  let selectedCount =
+    getManualSelectedIds()
+      .length;
+
+  boxes.forEach(
+    function(box) {
+      if (
+        !box.checked &&
+        selectedCount < 50
+      ) {
+        box.checked = true;
+        selectedCount++;
+      }
+    }
+  );
+
+  updateQuestionBankSummary();
+}
+
+
+function updateQuestionBankSummary() {
+  const summary =
+    document.getElementById(
+      "questionBankSummary"
+    );
+
+  if (!summary) {
+    return;
+  }
+
+  const mode =
+    getSelectionMode();
+
+  const selectedCategories =
+    getCheckedCategories();
+
+  if (
+    !initQuestionsReady &&
+    allQuestions.length === 0
+  ) {
+
+    summary.innerHTML =
+      "已選題庫：<strong>" +
+      selectedCategories.length +
+      "</strong> 個｜完整題目載入中……";
+
+    return;
+  }
+
+  if (mode === "random") {
+    const eligible =
+      getEligibleQuestionsFromSettings();
+
+    const input =
+      document.getElementById(
+        "questionCountInput"
+      );
+
+    const maxCount =
+      Math.min(
+        50,
+        eligible.length
+      );
+
+    if (input) {
+      input.max =
+        String(
+          Math.max(
+            1,
+            maxCount
+          )
+        );
+
+      let requested =
+        Number(
+          input.value
+        ) || 1;
+
+      if (
+        maxCount > 0 &&
+        requested > maxCount
+      ) {
+        requested =
+          maxCount;
+
+        input.value =
+          String(
+            requested
+          );
+      }
+    }
+
+    summary.innerHTML =
+      "模式：<strong>整體亂數</strong>｜已選題庫：<strong>" +
+      selectedCategories.length +
+      "</strong> 個｜可使用：<strong>" +
+      eligible.length +
+      "</strong> 題";
+
+    return;
+  }
+
+  if (mode === "quota") {
+    const quotaCounts =
+      getQuotaCountsFromUi();
+
+    const total =
+      Object.values(
+        quotaCounts
+      ).reduce(
+        function(sum, value) {
+          return sum + value;
+        },
+        0
+      );
+
+    summary.innerHTML =
+      "模式：<strong>題庫配額</strong>｜有配額題庫：<strong>" +
+      Object.keys(
+        quotaCounts
+      ).length +
+      "</strong> 個｜本局合計：<strong>" +
+      total +
+      "</strong> 題" +
+      (
+        total > 50
+          ? "<br><strong>目前超過50題，請調低各題庫配額。</strong>"
+          : ""
+      );
+
+    return;
+  }
+
+  const manualIds =
+    getManualSelectedIds();
+
+  summary.innerHTML =
+    "模式：<strong>手動選題</strong>｜已選題庫：<strong>" +
+    selectedCategories.length +
+    "</strong> 個｜已選題目：<strong>" +
+    manualIds.length +
+    "</strong> 題";
+}
+
+
+function shuffleQuestions(list) {
+  const result =
+    list.slice();
+
+  for (
+    let i =
+      result.length - 1;
+    i > 0;
+    i--
+  ) {
+    const j =
+      Math.floor(
+        Math.random() *
+        (i + 1)
+      );
+
+    const temp =
+      result[i];
+
+    result[i] =
+      result[j];
+
+    result[j] =
+      temp;
+  }
+
+  return result;
+}
+
+
+function buildQuestionSet() {
+  if (!currentClass) {
+    return;
+  }
+
+  const answeredCount =
+    Object.keys(
+      gameData.answers
+    ).length;
+
+  if (answeredCount > 0) {
+    showToast(
+      "已有答題紀錄，請先重新開始目前班級再建立新題組"
+    );
+    return;
+  }
+
+  const mode =
+    getSelectionMode();
+
+  const selectedCategories =
+    getCheckedCategories();
+
+  if (
+    selectedCategories.length === 0
+  ) {
+    showToast(
+      "請至少選擇一個題庫"
+    );
+    return;
+  }
+
+  let selectedQuestions = [];
+
+  const setting =
+    getSavedBankSetting();
+
+  setting.mode =
+    mode;
+
+  setting.categories =
+    selectedCategories.slice();
+
+  if (mode === "random") {
+    const eligible =
+      getEligibleQuestionsFromSettings();
+
+    if (eligible.length === 0) {
+      showToast(
+        "選擇的題庫目前沒有可用題目"
+      );
+      return;
+    }
+
+    const input =
+      document.getElementById(
+        "questionCountInput"
+      );
+
+    const requested =
+      Math.floor(
+        Number(
+          input.value
+        )
+      );
+
+    const maxCount =
+      Math.min(
+        50,
+        eligible.length
+      );
+
+    if (
+      !Number.isFinite(
+        requested
+      ) ||
+      requested < 1 ||
+      requested > maxCount
+    ) {
+      showToast(
+        "題數請設定為 1～" +
+        maxCount +
+        " 題"
+      );
+      return;
+    }
+
+    selectedQuestions =
+      shuffleQuestions(
+        eligible
+      ).slice(
+        0,
+        requested
+      );
+
+    setting.count =
+      requested;
+
+  } else if (
+    mode === "quota"
+  ) {
+    const groups =
+      getCategoryGroups();
+
+    const quotaCounts =
+      getQuotaCountsFromUi();
+
+    const quotaTotal =
+      Object.values(
+        quotaCounts
+      ).reduce(
+        function(sum, value) {
+          return sum + value;
+        },
+        0
+      );
+
+    if (quotaTotal < 1) {
+      showToast(
+        "請至少設定一個題庫的抽題數"
+      );
+      return;
+    }
+
+    if (quotaTotal > 50) {
+      showToast(
+        "題庫配額合計最多50題"
+      );
+      return;
+    }
+
+    Object.keys(
+      quotaCounts
+    ).forEach(
+      function(category) {
+        const pool =
+          groups[category] || [];
+
+        const count =
+          Math.min(
+            quotaCounts[
+              category
+            ],
+            pool.length
+          );
+
+        selectedQuestions =
+          selectedQuestions.concat(
+            shuffleQuestions(
+              pool
+            ).slice(
+              0,
+              count
+            )
+          );
+      }
+    );
+
+    selectedQuestions =
+      shuffleQuestions(
+        selectedQuestions
+      );
+
+    setting.quotaCounts =
+      quotaCounts;
+
+    setting.count =
+      selectedQuestions.length;
+
+  } else {
+    const manualIds =
+      getManualSelectedIds();
+
+    if (
+      manualIds.length < 1
+    ) {
+      showToast(
+        "請至少手動選擇1題"
+      );
+      return;
+    }
+
+    if (
+      manualIds.length > 50
+    ) {
+      showToast(
+        "手動選題最多50題"
+      );
+      return;
+    }
+
+    const idSet =
+      new Set(
+        manualIds
+      );
+
+    selectedQuestions =
+      allQuestions.filter(
+        function(question) {
+          return idSet.has(
+            String(
+              question.id
+            )
+          );
+        }
+      );
+
+    setting.manualIds =
+      manualIds.slice();
+
+    setting.count =
+      selectedQuestions.length;
+  }
+
+  if (
+    selectedQuestions.length === 0
+  ) {
+    showToast(
+      "本局沒有可用題目"
+    );
+    return;
+  }
+
+  questions =
+    selectedQuestions;
+
+  gameData.questionIds =
+    selectedQuestions.map(
+      function(question) {
+        return String(
+          question.id
+        );
+      }
+    );
+
+  gameData.selectedCategories =
+    selectedCategories.slice();
+
+  gameData.questionCount =
+    selectedQuestions.length;
+
+  gameData.updatedAt =
+    new Date()
+      .toISOString();
+
+  saveBankSetting(
+    setting
+  );
+
+  saveLocalGame();
+
+  renderCards();
+
+  updateStats();
+
+  closeSettings();
+
+  showToast(
+    "已建立本局 " +
+    selectedQuestions.length +
+    " 題"
+  );
+}
+
+/* ============================================================
+   空白遊戲資料
+============================================================ */
+
+function createEmptyGameData() {
+
+  return {
+
+    gameNo:
+      1,
+
+    answers:
+      {},
+
+    questionIds:
+      [],
+
+    selectedCategories:
+      [],
+
+    questionCount:
+      0,
+
+    updatedAt:
+      null
+
+  };
+
+}
+
+
+/* ============================================================
+   瀏覽器高度
+============================================================ */
+
+function updateAppHeight() {
+
+  let height =
+    window.innerHeight;
+
+  if (
+    window.visualViewport
+  ) {
+
+    height =
+      window
+        .visualViewport
+        .height;
+
+  }
+
+  document
+    .documentElement
+    .style
+    .setProperty(
+      "--app-height",
+      height + "px"
+    );
+
+}
+
+
+updateAppHeight();
+
+
+window.addEventListener(
+  "resize",
+  updateAppHeight
+);
+
+
+if (
+  window.visualViewport
+) {
+
+  window
+    .visualViewport
+    .addEventListener(
+      "resize",
+      updateAppHeight
+    );
+
+}
+
+
+/* ============================================================
+   啟動
+============================================================ */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function() {
+
+    updateAppHeight();
+
+    loadInitialData();
+
+  }
+);
+
+
+/* ============================================================
+   載入題庫 + 班級
+============================================================ */
+
+function loadInitialData() {
+
+  setCardsMessage(
+    "系統載入中……"
+  );
+
+  initClassesReady =
+    false;
+
+  initQuestionsReady =
+    false;
+
+  initStartupDone =
+    false;
+
+  /*
+    A. 題庫摘要：只負責 B欄題庫名稱與啟用題數。
+    失敗也不阻塞班級與完整題目。
+  */
+  google.script.run
+
+    .withSuccessHandler(
+      function(data) {
+
+        questionBankSummary =
+          Array.isArray(data)
+            ? data
+            : [];
+
+        renderQuestionBankSettings();
+
+      }
+    )
+
+    .withFailureHandler(
+      function(error) {
+
+        console.error(
+          "題庫摘要載入失敗：",
+          error
+        );
+
+        questionBankSummary =
+          [];
+
+      }
+    )
+
+    .getQuestionBankSummary();
+
+  /*
+    B. 班級：獨立載入。
+  */
+  google.script.run
+
+    .withSuccessHandler(
+      function(classData) {
+
+        classes =
+          Array.isArray(classData)
+            ? classData
+            : [];
+
+        initClassesReady =
+          true;
+
+        renderClassSelect();
+
+        tryFinishInitialStartup();
+
+      }
+    )
+
+    .withFailureHandler(
+      function(error) {
+
+        setCardsMessage(
+          "班級載入失敗：" +
+          getErrorMessage(error)
+        );
+
+        showOverlay(
+          "classOverlay"
+        );
+
+      }
+    )
+
+    .getClasses();
+
+  /*
+    C. 完整題目：使用 JSON 字串傳輸。
+    與題庫摘要完全分離。
+  */
+  google.script.run
+
+    .withSuccessHandler(
+      function(jsonText) {
+
+        let data = [];
+
+        try {
+
+          data =
+            JSON.parse(
+              String(
+                jsonText || "[]"
+              )
+            );
+
+        } catch (error) {
+
+          console.error(
+            "完整題庫 JSON 解析失敗：",
+            error
+          );
+
+          setCardsMessage(
+            "完整題庫解析失敗"
+          );
+
+          return;
+
+        }
+
+        allQuestions =
+          Array.isArray(data)
+            ? data
+            : [];
+
+        initQuestionsReady =
+          true;
+
+        /*
+          先給未建立題組時的安全預覽集合。
+        */
+        questions =
+          allQuestions.slice(
+            0,
+            Math.min(
+              50,
+              allQuestions.length
+            )
+          );
+
+        renderQuestionBankSettings();
+
+        updateStats();
+
+        tryFinishInitialStartup();
+
+      }
+    )
+
+    .withFailureHandler(
+      function(error) {
+
+        console.error(
+          "完整題庫載入失敗：",
+          error
+        );
+
+        setCardsMessage(
+          "完整題庫載入失敗：" +
+          getErrorMessage(error)
+        );
+
+        showToast(
+          "完整題庫載入失敗"
+        );
+
+      }
+    )
+
+    .getQuestionsJson();
+
+}
+
+
+function tryFinishInitialStartup() {
+
+  if (
+    initStartupDone ||
+    !initClassesReady ||
+    !initQuestionsReady
+  ) {
+    return;
+  }
+
+  initStartupDone =
+    true;
+
+  const lastClass =
+    localStorage.getItem(
+      LAST_CLASS_KEY
+    );
+
+  const exists =
+    classes.some(
+      function(item) {
+        return (
+          String(item.code) ===
+          String(lastClass)
+        );
+      }
+    );
+
+  if (
+    lastClass &&
+    exists
+  ) {
+
+    loadClass(
+      lastClass
+    );
+
+  } else {
+
+    renderCards();
+
+    showOverlay(
+      "classOverlay"
+    );
+
+  }
+
+}
+
+
+/* ============================================================
+   重新載入完整題庫
+============================================================ */
+
+function loadQuestions() {
+
+  google.script.run
+
+    .withSuccessHandler(
+      function(jsonText) {
+
+        let data = [];
+
+        try {
+
+          data =
+            JSON.parse(
+              String(
+                jsonText || "[]"
+              )
+            );
+
+        } catch (error) {
+
+          showToast(
+            "題庫資料解析失敗"
+          );
+
+          return;
+
+        }
+
+        allQuestions =
+          Array.isArray(data)
+            ? data
+            : [];
+
+        initQuestionsReady =
+          true;
+
+        applySavedQuestionSet();
+
+        renderQuestionBankSettings();
+
+        renderCards();
+
+        updateStats();
+
+      }
+    )
+
+    .withFailureHandler(
+      function(error) {
+
+        console.error(
+          "題庫重新載入失敗：",
+          error
+        );
+
+        showToast(
+          "題庫重新載入失敗"
+        );
+
+      }
+    )
+
+    .getQuestionsJson();
+
+}
+
+
+/* ============================================================
+   班級選單
+============================================================ */
+
+function renderClassSelect() {
+
+  const select =
+    document.getElementById(
+      "classSelect"
+    );
+
+  select.innerHTML =
+    "";
+
+  const empty =
+    document.createElement(
+      "option"
+    );
+
+  empty.value =
+    "";
+
+  empty.textContent =
+    "請選擇班級";
+
+  select.appendChild(
+    empty
+  );
+
+  classes.forEach(
+    function(item) {
+
+      const option =
+        document.createElement(
+          "option"
+        );
+
+      option.value =
+        item.code;
+
+      option.textContent =
+        item.code +
+        "　" +
+        item.name;
+
+      select.appendChild(
+        option
+      );
+
+    }
+  );
+
+  updateClassButton();
+
+}
+
+
+/* ============================================================
+   選班按鈕
+============================================================ */
+
+function updateClassButton() {
+
+  const value =
+    document
+      .getElementById(
+        "classSelect"
+      )
+      .value;
+
+  document
+    .getElementById(
+      "enterClassBtn"
+    )
+    .disabled =
+    !value;
+
+}
+
+
+/* ============================================================
+   開始 / 繼續
+============================================================ */
+
+function enterSelectedClass() {
+
+  const code =
+    document
+      .getElementById(
+        "classSelect"
+      )
+      .value;
+
+  if (!code) {
+
+    return;
+
+  }
+
+  const button =
+    document.getElementById(
+      "enterClassBtn"
+    );
+
+  button.disabled =
+    true;
+
+  button.textContent =
+    "讀取進度中……";
+
+  loadClass(
+    code,
+    function() {
+
+      button.disabled =
+        false;
+
+      button.textContent =
+        "開始 / 繼續";
+
+      hideOverlay(
+        "classOverlay"
+      );
+
+    }
+  );
+
+}
+
+
+/* ============================================================
+   載入指定班級
+ *
+ * 同時讀：
+ * 1. localStorage
+ * 2. Google Sheet
+ *
+ * 然後逐題合併。
+============================================================ */
+
+function loadClass(
+  code,
+  done
+) {
+
+  const classInfo =
+    classes.find(
+      function(item) {
+
+        return (
+          String(item.code) ===
+          String(code)
+        );
+
+      }
+    );
+
+  if (!classInfo) {
+
+    showToast(
+      "找不到這個班級"
+    );
+
+    if (done) {
+
+      done();
+
+    }
+
+    return;
+
+  }
+
+  currentClass =
+    classInfo;
+
+  localStorage.setItem(
+    LAST_CLASS_KEY,
+    String(code)
+  );
+
+  /*
+    先載入本機。
+  */
+  const localData =
+    loadLocalGame(
+      code
+    );
+
+  gameData =
+    localData;
+
+  applySavedQuestionSet();
+
+  cleanupAnswers();
+
+  renderCurrentClass();
+
+  renderCards();
+
+  updateStats();
+
+  setSyncStatus(
+    "syncing",
+    "☁ 同步中"
+  );
+
+  /*
+    再讀雲端。
+  */
+  google.script.run
+
+    .withSuccessHandler(
+      function(cloudData) {
+
+        mergeCloudProgress(
+          cloudData
+        );
+
+        saveLocalGame();
+
+        renderCards();
+
+        updateStats();
+
+        /*
+          合併完成後再回存一次雲端，
+          讓本機與雲端一致。
+        */
+        syncProgress(
+          function() {
+
+            if (done) {
+
+              done();
+
+            }
+
+          }
+        );
+
+      }
+    )
+
+    .withFailureHandler(
+      function(error) {
+
+        setSyncStatus(
+          "pending",
+          "☁ 尚未同步"
+        );
+
+        showToast(
+          "雲端讀取失敗，本機進度仍保留"
+        );
+
+        if (done) {
+
+          done();
+
+        }
+
+      }
+    )
+
+    .getClassProgress(
+      code
+    );
+
+}
+
+
+/* ============================================================
+   合併雲端進度
+ *
+ * 規則：
+ * - 本機已有題目 → 保留本機
+ * - 本機沒有、雲端有 → 補入本機
+ *
+ * 不偷偷改變已作答題目的結果。
+============================================================ */
+
+function mergeCloudProgress(
+  cloud
+) {
+
+  if (
+    !cloud ||
+    !cloud.answers
+  ) {
+
+    return;
+
+  }
+
+  const cloudGameNo =
+    Number(
+      cloud.gameNo
+    ) || 1;
+
+  const localGameNo =
+    Number(
+      gameData.gameNo
+    ) || 1;
+
+  /*
+    雲端局號較新：
+    表示該班曾經正式重置。
+    使用雲端新局。
+  */
+  if (
+    cloudGameNo >
+    localGameNo
+  ) {
+
+    gameData = {
+
+      gameNo:
+        cloudGameNo,
+
+      answers:
+        sanitizeAnswers(
+          cloud.answers
+        ),
+
+      questionIds:
+        Array.isArray(gameData.questionIds)
+          ? gameData.questionIds.slice()
+          : [],
+
+      selectedCategories:
+        Array.isArray(gameData.selectedCategories)
+          ? gameData.selectedCategories.slice()
+          : [],
+
+      questionCount:
+        Number(gameData.questionCount) || 0,
+
+      updatedAt:
+        cloud.updatedAt ||
+        null
+
+    };
+
+    applySavedQuestionSet();
+
+    cleanupAnswers();
+
+    return;
+
+  }
+
+  /*
+    本機局號較新：
+    保留本機。
+  */
+  if (
+    localGameNo >
+    cloudGameNo
+  ) {
+
+    return;
+
+  }
+
+  /*
+    同一局：
+    逐題補入雲端紀錄。
+  */
+  const cloudAnswers =
+    sanitizeAnswers(
+      cloud.answers
+    );
+
+  Object
+    .keys(
+      cloudAnswers
+    )
+    .forEach(
+      function(id) {
+
+        if (
+          !Object.prototype
+            .hasOwnProperty
+            .call(
+              gameData.answers,
+              id
+            )
+        ) {
+
+          gameData
+            .answers[id] =
+            cloudAnswers[id];
+
+        } else if (
+          gameData.answers[id] === "wrong" &&
+          cloudAnswers[id] === "correct"
+        ) {
+
+          /*
+            V1.4.8 單向升級：
+            雲端已答對時，本機同步為答對。
+          */
+          gameData
+            .answers[id] =
+            "correct";
+
+        }
+
+      }
+    );
+
+  cleanupAnswers();
+
+}
+
+
+/* ============================================================
+   顯示目前班級
+============================================================ */
+
+function renderCurrentClass() {
+
+  const badge =
+    document.getElementById(
+      "classBadge"
+    );
+
+  if (!currentClass) {
+
+    badge.textContent =
+      "尚未選班";
+
+    return;
+
+  }
+
+  badge.textContent =
+    currentClass.code +
+    " " +
+    currentClass.name;
+
+}
+
+
+/* ============================================================
+   V1.4.7 已答題再次查看設定
+============================================================ */
+
+function getReviewAnsweredEnabled() {
+
+  const saved =
+    localStorage.getItem(
+      REVIEW_ANSWERED_KEY
+    );
+
+  /*
+    預設為開啟。
+  */
+  if (saved === null) {
+    return true;
+  }
+
+  return saved !== "false";
+
+}
+
+
+function setReviewAnsweredEnabledFromUi() {
+
+  const toggle =
+    document.getElementById(
+      "reviewAnsweredToggle"
+    );
+
+  if (!toggle) {
+    return;
+  }
+
+  localStorage.setItem(
+    REVIEW_ANSWERED_KEY,
+    toggle.checked
+      ? "true"
+      : "false"
+  );
+
+  renderCards();
+
+  showToast(
+    toggle.checked
+      ? "已開啟：已答題可再次查看"
+      : "已關閉：已答題不可再次查看"
+  );
+
+}
+
+
+function syncReviewAnsweredSettingUi() {
+
+  const toggle =
+    document.getElementById(
+      "reviewAnsweredToggle"
+    );
+
+  if (!toggle) {
+    return;
+  }
+
+  toggle.checked =
+    getReviewAnsweredEnabled();
+
+}
+
+
+/* ============================================================
+   V1.4.8 答錯題可再次作答
+   預設：關閉
+============================================================ */
+
+function getRetryWrongEnabled() {
+
+  const saved =
+    localStorage.getItem(
+      RETRY_WRONG_KEY
+    );
+
+  return saved === "true";
+
+}
+
+
+function setRetryWrongEnabledFromUi() {
+
+  const toggle =
+    document.getElementById(
+      "retryWrongToggle"
+    );
+
+  if (!toggle) {
+    return;
+  }
+
+  localStorage.setItem(
+    RETRY_WRONG_KEY,
+    toggle.checked
+      ? "true"
+      : "false"
+  );
+
+  renderCards();
+
+  showToast(
+    toggle.checked
+      ? "已開啟：答錯題可再次作答"
+      : "已關閉：答錯題維持紅色，不可重答"
+  );
+
+}
+
+
+function syncRetryWrongSettingUi() {
+
+  const toggle =
+    document.getElementById(
+      "retryWrongToggle"
+    );
+
+  if (!toggle) {
+    return;
+  }
+
+  toggle.checked =
+    getRetryWrongEnabled();
+
+}
+
+
+/* ============================================================
+   卡牌
+============================================================ */
+
+function renderCards() {
+
+  const container =
+    document.getElementById(
+      "cardContainer"
+    );
+
+  container.innerHTML =
+    "";
+
+  if (
+    questions.length === 0
+  ) {
+
+    setCardsMessage(
+      "目前沒有啟用的題目。"
+    );
+
+    return;
+
+  }
+
+  questions.forEach(
+    function(question, index) {
+
+      const card =
+        document.createElement(
+          "button"
+        );
+
+      card.className =
+        "card";
+
+      const number =
+        document.createElement(
+          "span"
+        );
+
+      number.className =
+        "card-number";
+
+      /*
+        V1.4.3：
+        卡牌正面只顯示本局流水號 1、2、3、4……
+        不再顯示資料庫題號。
+        question.id 仍保留作為答題、儲存、同步的唯一識別。
+      */
+      number.textContent =
+        String(
+          index + 1
+        )
+        .padStart(
+          2,
+          "0"
+        );
+
+      card.appendChild(
+        number
+      );
+
+      const state =
+        gameData
+          .answers[
+            String(
+              question.id
+            )
+          ];
+
+      if (
+        state ===
+        "correct"
+      ) {
+
+        card
+          .classList
+          .add(
+            "correct",
+            "used"
+          );
+
+      }
+
+      if (
+        state ===
+        "wrong"
+      ) {
+
+        card
+          .classList
+          .add(
+            "wrong",
+            "used"
+          );
+
+      }
+
+      if (
+        state &&
+        (
+          getReviewAnsweredEnabled() ||
+          (
+            state === "wrong" &&
+            getRetryWrongEnabled()
+          )
+        )
+      ) {
+
+        card
+          .classList
+          .add(
+            "review-enabled"
+          );
+
+        card.title =
+          (
+            state === "wrong" &&
+            getRetryWrongEnabled()
+          )
+            ? "答錯題，點一下可再次作答"
+            : "已作答，點一下可再次查看題目";
+
+      }
+
+      card.addEventListener(
+        "click",
+        function() {
+
+          if (!currentClass) {
+
+            showOverlay(
+              "classOverlay"
+            );
+
+            return;
+
+          }
+
+          if (state) {
+
+            if (
+              state === "wrong" &&
+              getRetryWrongEnabled()
+            ) {
+
+              openQuestion(
+                question.id,
+                false,
+                true
+              );
+
+            } else if (
+              getReviewAnsweredEnabled()
+            ) {
+
+              openQuestion(
+                question.id,
+                true,
+                false
+              );
+
+            } else {
+
+              showToast(
+                "第 " +
+                (index + 1) +
+                " 題已回答"
+              );
+
+            }
+
+            return;
+
+          }
+
+          openQuestion(
+            question.id,
+            false,
+            false
+          );
+
+        }
+      );
+
+      container.appendChild(
+        card
+      );
+
+    }
+  );
+
+}
+
+
+/* ============================================================
+   題目
+============================================================ */
+
+function openQuestion(
+  questionId,
+  reviewOnly,
+  retryMode
+) {
+
+  reviewOnly =
+    reviewOnly === true;
+
+  retryMode =
+    retryMode === true;
+
+  if (!currentClass) {
+
+    showOverlay(
+      "classOverlay"
+    );
+
+    return;
+
+  }
+
+  const state =
+    gameData
+      .answers[
+        String(
+          questionId
+        )
+      ];
+
+  if (
+    state &&
+    !reviewOnly &&
+    !(
+      retryMode &&
+      state === "wrong" &&
+      getRetryWrongEnabled()
+    )
+  ) {
+
+    showToast(
+      "這一題已經回答過了"
+    );
+
+    return;
+
+  }
+
+  const question =
+    questions.find(
+      function(item) {
+
+        return (
+          String(item.id) ===
+          String(questionId)
+        );
+
+      }
+    );
+
+  if (!question) {
+
+    showToast(
+      "找不到這一題"
+    );
+
+    return;
+
+  }
+
+  currentQuestion =
+    question;
+
+  selectedAnswer =
+    null;
+
+  const displayIndex =
+    questions.findIndex(
+      function(item) {
+        return (
+          String(item.id) ===
+          String(question.id)
+        );
+      }
+    ) + 1;
+
+  document
+    .getElementById(
+      "questionNumber"
+    )
+    .textContent =
+    "第 " +
+    displayIndex +
+    " 題｜題庫編號：" +
+    question.id;
+
+  document
+    .getElementById(
+      "questionCategory"
+    )
+    .textContent =
+    question.category ||
+    "校園生活";
+
+  document
+    .getElementById(
+      "questionText"
+    )
+    .textContent =
+    question.question;
+
+  const imageAction =
+    document.getElementById(
+      "imageAction"
+    );
+
+  imageAction
+    .classList
+    .remove(
+      "show"
+    );
+
+  const questionImageBlock =
+    document.getElementById(
+      "questionImageBlock"
+    );
+
+  const questionImageFrame =
+    document.getElementById(
+      "questionImageFrame"
+    );
+
+  const questionStemImage =
+    document.getElementById(
+      "questionStemImage"
+    );
+
+  const questionImageError =
+    document.getElementById(
+      "questionImageError"
+    );
+
+  questionStemImage
+    .removeAttribute(
+      "src"
+    );
+
+  questionImageError
+    .classList
+    .remove(
+      "show"
+    );
+
+  questionImageFrame.style.display =
+    "";
+
+  if (
+    question.questionImageUrl
+  ) {
+
+    questionImageBlock
+      .classList
+      .add(
+        "show"
+      );
+
+    questionStemImage.onload =
+      function() {
+
+        questionImageFrame.style.display =
+          "";
+
+        questionImageError
+          .classList
+          .remove(
+            "show"
+          );
+
+      };
+
+    questionStemImage.onerror =
+      function() {
+
+        questionImageFrame.style.display =
+          "none";
+
+        questionImageError
+          .classList
+          .add(
+            "show"
+          );
+
+      };
+
+    questionStemImage.src =
+      question.questionImageUrl;
+
+  } else {
+
+    questionImageBlock
+      .classList
+      .remove(
+        "show"
+      );
+
+  }
+
+  const choiceContainer =
+    document.getElementById(
+      "choices"
+    );
+
+  choiceContainer.innerHTML =
+    "";
+
+  [
+    "A",
+    "B",
+    "C",
+    "D"
+  ]
+  .forEach(
+    function(letter) {
+
+      const choiceText =
+        question
+          .choices[
+            letter
+          ];
+
+      if (
+        choiceText === null ||
+        choiceText === undefined ||
+        String(choiceText)
+          .trim() === ""
+      ) {
+
+        return;
+
+      }
+
+      const button =
+        document.createElement(
+          "button"
+        );
+
+      button.className =
+        "choice";
+
+      const letterSpan =
+        document.createElement(
+          "span"
+        );
+
+      letterSpan.className =
+        "choice-letter";
+
+      letterSpan.textContent =
+        letter;
+
+      const textSpan =
+        document.createElement(
+          "span"
+        );
+
+      textSpan.textContent =
+        choiceText;
+
+      button.appendChild(
+        letterSpan
+      );
+
+      button.appendChild(
+        textSpan
+      );
+
+      if (
+        reviewOnly
+      ) {
+
+        button.disabled =
+          true;
+
+      } else {
+
+        button.addEventListener(
+          "click",
+          function() {
+
+            selectChoice(
+              letter,
+              button
+            );
+
+          }
+        );
+
+      }
+
+      choiceContainer
+        .appendChild(
+          button
+        );
+
+    }
+  );
+
+  const submitButton =
+    document.getElementById(
+      "submitBtn"
+    );
+
+  submitButton.disabled =
+    true;
+
+  submitButton.textContent =
+    reviewOnly
+      ? "已作答（僅查看）"
+      : (
+          retryMode
+            ? "再次確認答案"
+            : "確認答案"
+        );
+
+  document
+    .getElementById(
+      "questionArea"
+    )
+    .style
+    .display =
+    "block";
+
+  document
+    .getElementById(
+      "resultArea"
+    )
+    .classList
+    .remove(
+      "show"
+    );
+
+  showOverlay(
+    "questionOverlay"
+  );
+
+}
+
+
+/* ============================================================
+   選答案
+============================================================ */
+
+function selectChoice(
+  letter,
+  button
+) {
+
+  selectedAnswer =
+    letter;
+
+  document
+    .querySelectorAll(
+      ".choice"
+    )
+    .forEach(
+      function(item) {
+
+        item
+          .classList
+          .remove(
+            "selected"
+          );
+
+      }
+    );
+
+  button
+    .classList
+    .add(
+      "selected"
+    );
+
+  document
+    .getElementById(
+      "submitBtn"
+    )
+    .disabled =
+    false;
+
+}
+
+
+/* ============================================================
+   送出答案
+============================================================ */
+
+function submitAnswer() {
+
+  if (
+    !currentQuestion ||
+    !selectedAnswer
+  ) {
+
+    return;
+
+  }
+
+  const submitBtn =
+    document.getElementById(
+      "submitBtn"
+    );
+
+  submitBtn.disabled =
+    true;
+
+  submitBtn.textContent =
+    "判斷中……";
+
+  google.script.run
+
+    .withSuccessHandler(
+      function(result) {
+
+        submitBtn.textContent =
+          "確認答案";
+
+        showResult(
+          result
+        );
+
+      }
+    )
+
+    .withFailureHandler(
+      function(error) {
+
+        submitBtn.disabled =
+          false;
+
+        submitBtn.textContent =
+          "確認答案";
+
+        showToast(
+          "判斷答案失敗：" +
+          getErrorMessage(error)
+        );
+
+      }
+    )
+
+    .checkAnswer(
+      currentQuestion.id,
+      selectedAnswer
+    );
+
+}
+
+
+/* ============================================================
+   結果
+============================================================ */
+
+function showResult(
+  result
+) {
+
+  const isCorrect =
+    result.correct ===
+    true;
+
+  currentQuestion.answerImageUrl =
+    result.answerImageUrl || "";
+
+  const imageAction =
+    document.getElementById(
+      "imageAction"
+    );
+
+  if (
+    currentQuestion.answerImageUrl
+  ) {
+
+    imageAction
+      .classList
+      .add(
+        "show"
+      );
+
+  } else {
+
+    imageAction
+      .classList
+      .remove(
+        "show"
+      );
+
+  }
+
+  /*
+    1. 先改記憶體
+  */
+  gameData
+    .answers[
+      String(
+        currentQuestion.id
+      )
+    ] =
+    isCorrect
+      ?
+      "correct"
+      :
+      "wrong";
+
+  gameData.updatedAt =
+    new Date()
+      .toISOString();
+
+  /*
+    2. 立即存本機
+  */
+  saveLocalGame();
+
+  /*
+    3. 立即更新畫面
+  */
+  renderCards();
+
+  updateStats();
+
+  /*
+    4. 背景同步雲端
+  */
+  syncProgress();
+
+  /*
+    5. 顯示答案結果
+  */
+  document
+    .getElementById(
+      "questionArea"
+    )
+    .style
+    .display =
+    "none";
+
+  const resultArea =
+    document.getElementById(
+      "resultArea"
+    );
+
+  resultArea
+    .classList
+    .add(
+      "show"
+    );
+
+  const banner =
+    document.getElementById(
+      "resultBanner"
+    );
+
+  banner.className =
+    "result-banner " +
+    (
+      isCorrect
+        ?
+        "correct"
+        :
+        "wrong"
+    );
+
+  banner.textContent =
+    isCorrect
+      ?
+      "🎉 回答正確！"
+      :
+      "❌ 回答錯誤";
+
+  document
+    .getElementById(
+      "yourAnswer"
+    )
+    .textContent =
+    formatAnswer(
+      result.selectedAnswer
+    );
+
+  document
+    .getElementById(
+      "correctAnswer"
+    )
+    .textContent =
+    formatAnswer(
+      result.correctAnswer
+    );
+
+  document
+    .getElementById(
+      "explanationText"
+    )
+    .textContent =
+    result.explanation ||
+    "目前沒有答案解析。";
+
+  const source =
+    document.getElementById(
+      "sourceText"
+    );
+
+  if (
+    result.source
+  ) {
+
+    source.textContent =
+      "資料來源：" +
+      result.source;
+
+    source.style.display =
+      "block";
+
+  } else {
+
+    source.style.display =
+      "none";
+
+  }
+
+}
+
+
+/* ============================================================
+   答案文字
+============================================================ */
+
+function formatAnswer(
+  letter
+) {
+
+  if (
+    !currentQuestion ||
+    !letter
+  ) {
+
+    return (
+      letter ||
+      ""
+    );
+
+  }
+
+  const text =
+    currentQuestion
+      .choices[
+        letter
+      ];
+
+  return (
+    letter +
+    ". " +
+    (
+      text ||
+      ""
+    )
+  );
+
+}
+
+
+/* ============================================================
+   關閉題目
+============================================================ */
+
+function closeQuestion() {
+
+  hideOverlay(
+    "questionOverlay"
+  );
+
+  const stemImage =
+    document.getElementById(
+      "questionStemImage"
+    );
+
+  if (stemImage) {
+
+    stemImage
+      .removeAttribute(
+        "src"
+      );
+
+  }
+
+  currentQuestion =
+    null;
+
+  selectedAnswer =
+    null;
+
+}
+
+
+function finishQuestion() {
+
+  closeQuestion();
+
+}
+
+
+/* ============================================================
+   圖片
+============================================================ */
+
+function openQuestionStemImage() {
+
+  if (
+    !currentQuestion ||
+    !currentQuestion.questionImageUrl
+  ) {
+
+    return;
+
+  }
+
+  document
+    .getElementById(
+      "questionImage"
+    )
+    .src =
+    currentQuestion.questionImageUrl;
+
+  showOverlay(
+    "imageOverlay"
+  );
+
+}
+
+
+function openQuestionImage() {
+
+  if (
+    !currentQuestion ||
+    !currentQuestion.answerImageUrl
+  ) {
+
+    return;
+
+  }
+
+  document
+    .getElementById(
+      "questionImage"
+    )
+    .src =
+    currentQuestion.answerImageUrl;
+
+  showOverlay(
+    "imageOverlay"
+  );
+
+}
+
+
+function closeQuestionImage() {
+
+  hideOverlay(
+    "imageOverlay"
+  );
+
+  setTimeout(
+    function() {
+
+      document
+        .getElementById(
+          "questionImage"
+        )
+        .removeAttribute(
+          "src"
+        );
+
+    },
+    100
+  );
+
+}
+
+
+/* ============================================================
+   V1.4.4 全螢幕切換
+============================================================ */
+
+function isFullscreenActive() {
+
+  return !!(
+    document.fullscreenElement ||
+    document.webkitFullscreenElement
+  );
+
+}
+
+
+function updateFullscreenButton() {
+
+  const button =
+    document.getElementById(
+      "fullscreenBtn"
+    );
+
+  if (!button) {
+    return;
+  }
+
+  if (
+    isFullscreenActive()
+  ) {
+
+    button.textContent =
+      "↙ 離開全螢幕";
+
+    button.title =
+      "離開全螢幕";
+
+  } else {
+
+    button.textContent =
+      "⛶ 全螢幕";
+
+    button.title =
+      "切換全螢幕";
+
+  }
+
+}
+
+
+function toggleFullscreen() {
+
+  if (
+    !isFullscreenActive()
+  ) {
+
+    const root =
+      document.documentElement;
+
+    const request =
+      root.requestFullscreen ||
+      root.webkitRequestFullscreen;
+
+    if (!request) {
+
+      showToast(
+        "此瀏覽器不支援網頁全螢幕"
+      );
+
+      return;
+
+    }
+
+    try {
+
+      const result =
+        request.call(root);
+
+      if (
+        result &&
+        typeof result.catch ===
+          "function"
+      ) {
+
+        result.catch(
+          function(error) {
+
+            console.error(
+              "進入全螢幕失敗：",
+              error
+            );
+
+            showToast(
+              "無法進入全螢幕"
+            );
+
+          }
+        );
+
+      }
+
+    } catch (error) {
+
+      console.error(
+        "進入全螢幕失敗：",
+        error
+      );
+
+      showToast(
+        "無法進入全螢幕"
+      );
+
+    }
+
+    return;
+
+  }
+
+  const exit =
+    document.exitFullscreen ||
+    document.webkitExitFullscreen;
+
+  if (!exit) {
+    return;
+  }
+
+  try {
+
+    const result =
+      exit.call(document);
+
+    if (
+      result &&
+      typeof result.catch ===
+        "function"
+    ) {
+
+      result.catch(
+        function(error) {
+
+          console.error(
+            "離開全螢幕失敗：",
+            error
+          );
+
+        }
+      );
+
+    }
+
+  } catch (error) {
+
+    console.error(
+      "離開全螢幕失敗：",
+      error
+    );
+
+  }
+
+}
+
+
+document.addEventListener(
+  "fullscreenchange",
+  updateFullscreenButton
+);
+
+
+document.addEventListener(
+  "webkitfullscreenchange",
+  updateFullscreenButton
+);
+
+
+/* ============================================================
+   隨機題目
+============================================================ */
+
+function randomQuestion() {
+
+  if (!currentClass) {
+
+    showOverlay(
+      "classOverlay"
+    );
+
+    return;
+
+  }
+
+  const available =
+    questions.filter(
+      function(question) {
+
+        return (
+          !gameData
+            .answers[
+              String(
+                question.id
+              )
+            ]
+        );
+
+      }
+    );
+
+  if (
+    available.length === 0
+  ) {
+
+    showToast(
+      "🎉 所有題目都完成了！"
+    );
+
+    return;
+
+  }
+
+  const index =
+    Math.floor(
+      Math.random() *
+      available.length
+    );
+
+  openQuestion(
+    available[index].id
+  );
+
+}
+
+
+/* ============================================================
+   本機保存
+============================================================ */
+
+function getStorageKey(
+  classCode
+) {
+
+  return (
+    STORAGE_PREFIX +
+    String(classCode)
+  );
+
+}
+
+
+function saveLocalGame() {
+
+  if (!currentClass) {
+
+    return;
+
+  }
+
+  try {
+
+    localStorage.setItem(
+
+      getStorageKey(
+        currentClass.code
+      ),
+
+      JSON.stringify(
+        gameData
+      )
+
+    );
+
+  } catch (error) {
+
+    console.warn(
+      "本機儲存失敗",
+      error
+    );
+
+  }
+
+}
+
+
+/* ============================================================
+   本機讀取
+============================================================ */
+
+function loadLocalGame(
+  classCode
+) {
+
+  try {
+
+    const saved =
+      localStorage.getItem(
+        getStorageKey(
+          classCode
+        )
+      );
+
+    if (!saved) {
+
+      return createEmptyGameData();
+
+    }
+
+    const parsed =
+      JSON.parse(
+        saved
+      );
+
+    return {
+
+      gameNo:
+        Number(
+          parsed.gameNo
+        ) || 1,
+
+      answers:
+        sanitizeAnswers(
+          parsed.answers
+        ),
+
+      questionIds:
+        Array.isArray(parsed.questionIds)
+          ? parsed.questionIds.map(String)
+          : [],
+
+      selectedCategories:
+        Array.isArray(parsed.selectedCategories)
+          ? parsed.selectedCategories.map(String)
+          : [],
+
+      questionCount:
+        Number(parsed.questionCount) || 0,
+
+      updatedAt:
+        parsed.updatedAt ||
+        null
+
+    };
+
+  } catch (error) {
+
+    return createEmptyGameData();
+
+  }
+
+}
+
+
+/* ============================================================
+   清理答案
+============================================================ */
+
+function sanitizeAnswers(
+  answers
+) {
+
+  const result =
+    {};
+
+  if (
+    !answers ||
+    typeof answers !==
+      "object"
+  ) {
+
+    return result;
+
+  }
+
+  Object
+    .keys(
+      answers
+    )
+    .forEach(
+      function(id) {
+
+        const value =
+          answers[id];
+
+        if (
+          value === "correct" ||
+          value === "wrong"
+        ) {
+
+          result[
+            String(id)
+          ] =
+            value;
+
+        }
+
+      }
+    );
+
+  return result;
+
+}
+
+
+/* ============================================================
+   清理題庫已不存在的題號
+============================================================ */
+
+function cleanupAnswers() {
+
+  const validIds =
+    new Set(
+
+      questions.map(
+        function(question) {
+
+          return String(
+            question.id
+          );
+
+        }
+      )
+
+    );
+
+  Object
+    .keys(
+      gameData.answers
+    )
+    .forEach(
+      function(id) {
+
+        if (
+          !validIds.has(id)
+        ) {
+
+          delete gameData
+            .answers[id];
+
+        }
+
+      }
+    );
+
+}
+
+
+/* ============================================================
+   Google Sheet 同步
+============================================================ */
+
+function syncProgress(
+  done
+) {
+
+  if (!currentClass) {
+
+    if (done) {
+
+      done();
+
+    }
+
+    return;
+
+  }
+
+  /*
+    如果正在同步，
+    記錄「還需要再同步一次」。
+  */
+  if (
+    syncInProgress
+  ) {
+
+    syncQueued =
+      true;
+
+    if (done) {
+
+      /*
+        此 callback 不在此刻執行，
+        避免誤稱已同步。
+      */
+    }
+
+    return;
+
+  }
+
+  syncInProgress =
+    true;
+
+  syncQueued =
+    false;
+
+  setSyncStatus(
+    "syncing",
+    "☁ 同步中"
+  );
+
+  const syncingClassCode =
+    String(
+      currentClass.code
+    );
+
+  const payload = {
+
+    classCode:
+      syncingClassCode,
+
+    gameNo:
+      gameData.gameNo,
+
+    answers:
+      Object.assign(
+        {},
+        gameData.answers
+      ),
+
+    updatedAt:
+      gameData.updatedAt,
+
+    allowRetryUpgrade:
+      getRetryWrongEnabled()
+
+  };
+
+  google.script.run
+
+    .withSuccessHandler(
+      function(result) {
+
+        syncInProgress =
+          false;
+
+        /*
+          若同步期間已切班，
+          不把舊班資料寫進目前班。
+        */
+        if (
+          currentClass &&
+          String(
+            currentClass.code
+          ) ===
+          syncingClassCode
+        ) {
+
+          if (
+            result &&
+            result.answers
+          ) {
+
+            const cloudAnswers =
+              sanitizeAnswers(
+                result.answers
+              );
+
+            Object
+              .keys(
+                cloudAnswers
+              )
+              .forEach(
+                function(id) {
+
+                  if (
+                    !Object.prototype
+                      .hasOwnProperty
+                      .call(
+                        gameData.answers,
+                        id
+                      )
+                  ) {
+
+                    gameData
+                      .answers[id] =
+                      cloudAnswers[id];
+
+                  } else if (
+                    gameData.answers[id] === "wrong" &&
+                    cloudAnswers[id] === "correct"
+                  ) {
+
+                    /*
+                      V1.4.8 單向升級：
+                      已答對的結果不會再被降回答錯。
+                    */
+                    gameData
+                      .answers[id] =
+                      "correct";
+
+                  }
+
+                }
+              );
+
+            gameData.gameNo =
+              Number(
+                result.gameNo
+              ) ||
+              gameData.gameNo;
+
+            gameData.updatedAt =
+              result.updatedAt ||
+              gameData.updatedAt;
+
+            saveLocalGame();
+
+            renderCards();
+
+            updateStats();
+
+          }
+
+          setSyncStatus(
+            "synced",
+            "☁ 已同步"
+          );
+
+        }
+
+        if (
+          syncQueued
+        ) {
+
+          syncQueued =
+            false;
+
+          syncProgress(
+            done
+          );
+
+          return;
+
+        }
+
+        if (done) {
+
+          done();
+
+        }
+
+      }
+    )
+
+    .withFailureHandler(
+      function(error) {
+
+        syncInProgress =
+          false;
+
+        setSyncStatus(
+          "pending",
+          "☁ 尚未同步"
+        );
+
+        /*
+          本機資料完全不刪除。
+        */
+        if (done) {
+
+          done();
+
+        }
+
+      }
+    )
+
+    .saveClassProgress(
+      payload
+    );
+
+}
+
+
+/* ============================================================
+   手動同步
+============================================================ */
+
+function manualSync() {
+
+  if (!currentClass) {
+
+    return;
+
+  }
+
+  closeSettings();
+
+  syncProgress(
+    function() {
+
+      showToast(
+        "同步作業完成"
+      );
+
+    }
+  );
+
+}
+
+
+/* ============================================================
+   同步狀態
+============================================================ */
+
+function setSyncStatus(
+  type,
+  text
+) {
+
+  const element =
+    document.getElementById(
+      "syncStatus"
+    );
+
+  element.className =
+    "sync-status " +
+    type;
+
+  element.textContent =
+    text;
+
+}
+
+
+/* ============================================================
+   統計
+============================================================ */
+
+function updateStats() {
+
+  let correct =
+    0;
+
+  let wrong =
+    0;
+
+  questions.forEach(
+    function(question) {
+
+      const state =
+        gameData
+          .answers[
+            String(
+              question.id
+            )
+          ];
+
+      if (
+        state ===
+        "correct"
+      ) {
+
+        correct++;
+
+      }
+
+      if (
+        state ===
+        "wrong"
+      ) {
+
+        wrong++;
+
+      }
+
+    }
+  );
+
+  document
+    .getElementById(
+      "totalCount"
+    )
+    .textContent =
+    questions.length;
+
+  document
+    .getElementById(
+      "finishedCount"
+    )
+    .textContent =
+    correct + wrong;
+
+  document
+    .getElementById(
+      "correctCount"
+    )
+    .textContent =
+    correct;
+
+  document
+    .getElementById(
+      "wrongCount"
+    )
+    .textContent =
+    wrong;
+
+}
+
+
+/* ============================================================
+   V1.4.9 操作使用說明
+============================================================ */
+
+function openHelp() {
+
+  showOverlay(
+    "helpOverlay"
+  );
+
+}
+
+
+function closeHelp() {
+
+  hideOverlay(
+    "helpOverlay"
+  );
+
+}
+
+
+/* ============================================================
+   設定
+============================================================ */
+
+function openSettings() {
+
+  if (!currentClass) {
+
+    showOverlay(
+      "classOverlay"
+    );
+
+    return;
+
+  }
+
+  let correct =
+    0;
+
+  let wrong =
+    0;
+
+  Object
+    .values(
+      gameData.answers
+    )
+    .forEach(
+      function(value) {
+
+        if (
+          value ===
+          "correct"
+        ) {
+
+          correct++;
+
+        }
+
+        if (
+          value ===
+          "wrong"
+        ) {
+
+          wrong++;
+
+        }
+
+      }
+    );
+
+  document
+    .getElementById(
+      "settingsInfo"
+    )
+    .innerHTML =
+
+    '<div class="stat-cell">' +
+      '<span class="stat-label">班級</span>' +
+      '<span class="stat-value">' +
+        escapeHtml(
+          currentClass.code +
+          " " +
+          currentClass.name
+        ) +
+      '</span>' +
+    '</div>' +
+
+    '<div class="stat-cell">' +
+      '<span class="stat-label">進度</span>' +
+      '<span class="stat-value">' +
+        (correct + wrong) +
+        " / " +
+        questions.length +
+      '</span>' +
+    '</div>' +
+
+    '<div class="stat-cell">' +
+      '<span class="stat-label">答對</span>' +
+      '<span class="stat-value">' +
+        correct +
+      '</span>' +
+    '</div>' +
+
+    '<div class="stat-cell">' +
+      '<span class="stat-label">答錯</span>' +
+      '<span class="stat-value">' +
+        wrong +
+      '</span>' +
+    '</div>';
+
+  renderQuestionBankSettings();
+
+  syncReviewAnsweredSettingUi();
+
+  syncRetryWrongSettingUi();
+
+  showOverlay(
+    "settingsOverlay"
+  );
+
+}
+
+
+function closeSettings() {
+
+  hideOverlay(
+    "settingsOverlay"
+  );
+
+}
+
+
+/* ============================================================
+   切換班級
+============================================================ */
+
+function switchClass() {
+
+  /*
+    先保存目前班級本機資料。
+  */
+  saveLocalGame();
+
+  /*
+    背景同步目前班。
+  */
+  syncProgress();
+
+  closeSettings();
+
+  const select =
+    document.getElementById(
+      "classSelect"
+    );
+
+  if (
+    currentClass
+  ) {
+
+    select.value =
+      currentClass.code;
+
+  }
+
+  updateClassButton();
+
+  showOverlay(
+    "classOverlay"
+  );
+
+}
+
+
+/* ============================================================
+   重置目前班級
+ *
+ * 二次確認
+============================================================ */
+
+function requestResetClass() {
+
+  if (!currentClass) {
+
+    return;
+
+  }
+
+  const finished =
+    Object
+      .keys(
+        gameData.answers
+      )
+      .length;
+
+  const first =
+    confirm(
+
+      "重新開始「" +
+      currentClass.name +
+      "」？\n\n" +
+
+      "目前已完成：" +
+      finished +
+      " / " +
+      questions.length +
+      " 題\n\n" +
+
+      "這只會重置目前班級。\n" +
+      "其他班級不受影響。"
+
+    );
+
+  if (!first) {
+
+    return;
+
+  }
+
+  const second =
+    confirm(
+
+      "第二次確認\n\n" +
+
+      "確定要清除「" +
+      currentClass.name +
+      "」目前這一局的所有答題紀錄嗎？\n\n" +
+
+      "清除後，所有卡牌會恢復為藍色。"
+
+    );
+
+  if (!second) {
+
+    return;
+
+  }
+
+  const resetCode =
+    currentClass.code;
+
+  setSyncStatus(
+    "syncing",
+    "☁ 重置中"
+  );
+
+  google.script.run
+
+    .withSuccessHandler(
+      function(result) {
+
+        gameData = {
+
+          gameNo:
+            Number(
+              result.gameNo
+            ) || 1,
+
+          answers:
+            {},
+
+          questionIds:
+            Array.isArray(gameData.questionIds)
+              ? gameData.questionIds.slice()
+              : [],
+
+          selectedCategories:
+            Array.isArray(gameData.selectedCategories)
+              ? gameData.selectedCategories.slice()
+              : [],
+
+          questionCount:
+            Number(gameData.questionCount) || 0,
+
+          updatedAt:
+            result.updatedAt ||
+            new Date()
+              .toISOString()
+
+        };
+
+        /*
+          覆寫目前班級本機資料。
+        */
+        saveLocalGame();
+
+        renderCards();
+
+        updateStats();
+
+        setSyncStatus(
+          "synced",
+          "☁ 已同步"
+        );
+
+        closeSettings();
+
+        showToast(
+          "目前班級已重新開始"
+        );
+
+      }
+    )
+
+    .withFailureHandler(
+      function(error) {
+
+        setSyncStatus(
+          "pending",
+          "☁ 重置失敗"
+        );
+
+        showToast(
+          "雲端重置失敗，本機紀錄未清除"
+        );
+
+      }
+    )
+
+    .resetClassProgress(
+      resetCode
+    );
+
+}
+
+
+/* ============================================================
+   卡牌訊息
+============================================================ */
+
+function setCardsMessage(
+  message
+) {
+
+  document
+    .getElementById(
+      "cardContainer"
+    )
+    .innerHTML =
+
+    '<div class="loading">' +
+    escapeHtml(message) +
+    '</div>';
+
+}
+
+
+/* ============================================================
+   Overlay
+============================================================ */
+
+function showOverlay(
+  id
+) {
+
+  document
+    .getElementById(
+      id
+    )
+    .classList
+    .add(
+      "show"
+    );
+
+}
+
+
+function hideOverlay(
+  id
+) {
+
+  document
+    .getElementById(
+      id
+    )
+    .classList
+    .remove(
+      "show"
+    );
+
+}
+
+
+/* ============================================================
+   Toast
+============================================================ */
+
+function showToast(
+  message
+) {
+
+  const toast =
+    document.getElementById(
+      "toast"
+    );
+
+  toast.textContent =
+    message;
+
+  toast
+    .classList
+    .add(
+      "show"
+    );
+
+  setTimeout(
+    function() {
+
+      toast
+        .classList
+        .remove(
+          "show"
+        );
+
+    },
+    2200
+  );
+
+}
+
+
+/* ============================================================
+   Error
+============================================================ */
+
+function getErrorMessage(
+  error
+) {
+
+  if (!error) {
+
+    return "未知錯誤";
+
+  }
+
+  return (
+    error.message ||
+    String(error)
+  );
+
+}
+
+
+/* ============================================================
+   Escape
+============================================================ */
+
+function escapeHtml(
+  value
+) {
+
+  return String(
+    value
+  )
+
+    .replaceAll(
+      "&",
+      "&amp;"
+    )
+
+    .replaceAll(
+      "<",
+      "&lt;"
+    )
+
+    .replaceAll(
+      ">",
+      "&gt;"
+    )
+
+    .replaceAll(
+      '"',
+      "&quot;"
+    )
+
+    .replaceAll(
+      "'",
+      "&#039;"
+    );
+
+}
+
+</script>
+
+
+</body>
+
+</html>
